@@ -79,6 +79,11 @@ namespace ConsigliaViaggi19App
                 else
                     parametri.ValutazioneMediaMassima = (int)valutazioneMediaMassimaPicker.ItemsSource[valutazioneMediaMassimaPicker.SelectedIndex];
             }
+            else
+            {
+                parametri.ValutazioneMediaMinima = 0;
+                parametri.ValutazioneMediaMassima = 5;
+            }
             return parametri;
         }
 

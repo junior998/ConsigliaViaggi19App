@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace ConsigliaViaggi19App
@@ -113,6 +114,7 @@ namespace ConsigliaViaggi19App
                 VerticalOptions = LayoutOptions.FillAndExpand,
                 HorizontalOptions = LayoutOptions.FillAndExpand
             };
+            vediSuMappaButton.Clicked += EventVediSuMappaButtonClicked;
             recensioniButton = new Button()
             {
                 Text = "Recensioni",
@@ -123,6 +125,19 @@ namespace ConsigliaViaggi19App
                 HorizontalOptions = LayoutOptions.FillAndExpand
             };
             recensioniButton.Clicked += EventRecensioniButtonClicked;
+        }
+
+        private async void EventVediSuMappaButtonClicked(object sender, EventArgs e)
+        {
+            Location location = new Location(Struttura.Latitudine, Struttura.Longitudine);
+            try
+            {
+                await Map.OpenAsync(location);
+            }
+            catch(Exception)
+            {
+                await DisplayAlert("Errore", "Nessuna applicazione disponibile per vedere su mappa", "Ok");
+            }
         }
 
         private async void EventRecensisciButtonClicked(object sender, EventArgs e)
