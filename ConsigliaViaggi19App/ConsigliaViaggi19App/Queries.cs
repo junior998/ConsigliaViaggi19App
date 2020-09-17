@@ -7,12 +7,52 @@ using PCLAppConfig;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using System.IO;
-using System.Diagnostics;
 
 namespace ConsigliaViaggi19App
 {
     static class Queries
     {
+        public static Struttura GetStruttura(int idStruttura)
+        {
+            string query = "select S.idStruttura, S.nome, S.immagine, S.tipo, S.latitudine, " +
+                "S.longitudine, S.descrizione, C.nome as nomeCitta " +
+                "from Strutture S, Citta C " +
+                $"where S.idStruttura = {idStruttura} and " +
+                "S.idCitta = C.idCitta;";
+            DataTable table = EseguiComando(query);
+            DataRow row = table.Rows[0];
+            return CreaStruttura(row);
+        }
+        
+        public static List<RecensionePersonale> GetRecensioniPersonali(string nicknameUtente)
+        {
+            string query = "select S.idStruttura, S.nome, S.immagine, R.valutazione, R.commento, R.stato, R.visibileConNickname, R.dataCreazione " +
+                            "from Recensioni R, Strutture S " +
+                            "where R.idStruttura = S.idStruttura and " +
+                            $"R.nicknameUtente = '{nicknameUtente.Replace("'", "''")}'";
+            DataTable table = EseguiComando(query);
+            List<RecensionePersonale> recensioniPersonali = new List<RecensionePersonale>();
+            foreach(DataRow row in table.Rows)
+            {
+                RecensionePersonale recensionePersonale = new RecensionePersonale
+                {
+                    IdStruttura = (int)row["idStruttura"],
+                    NomeStruttura = row["nome"].ToString(),
+                    ImmagineStruttura = ConvertImage(row["immagine"]),
+                    Stato = row["stato"].ToString(),
+                    Recensione = new Recensione()
+                    {
+                        Valutazione = (int)row["valutazione"],
+                        Commento = row["commento"].ToString(),
+                        VisibileConNickname = (bool)row["visibileConNickname"],
+                        DataCreazione = (DateTime)row["dataCreazione"]
+                    }
+                };
+                recensioniPersonali.Add(recensionePersonale);
+            }
+            return recensioniPersonali;
+        }
+        
         public static void CaricaRecensione(Recensione recensione)
         {
             int visibileConNickaname = (recensione.VisibileConNickname) ? 1 : 0;
@@ -21,6 +61,7 @@ namespace ConsigliaViaggi19App
                 $"'{recensione.NicknameUtente}', {recensione.IdStruttura})";
             EseguiModifica(query);
         }
+        
         public static List<Recensione> GetRecensioni(ParametriRicercaRecensione parametri)
         {
             string query = $"select * " +
@@ -47,6 +88,7 @@ namespace ConsigliaViaggi19App
             }
             return recensioni;
         }
+        
         public static List<Tuple<int, int>> GetQuantitativoRecensioni(int idStruttura)
         {
             string query = $"select R.valutazione, count(R.idRecensione) as conta " +
@@ -64,7 +106,7 @@ namespace ConsigliaViaggi19App
             }
             return quantitaRecensioni;
         }
-
+        
         public static List<Struttura> GetLuoghiTrovati(ParametriRicercaStrutture parametri)
         {
             StringBuilder sottoQueryUno = new StringBuilder($"select S.idStruttura, S.nome, S.immagine, S.tipo, S.latitudine, " +
@@ -92,6 +134,7 @@ namespace ConsigliaViaggi19App
                 return FiltraStrutturePerDistanza(parametri.PosizioneCorrente, table, parametri.DistanzaMinima, parametri.DistanzaMassima);
             return GetLuoghiTrovatiDaDataTable(parametri.PosizioneCorrente, table);
         }
+        
         public static List<string> GetCitta()
         {
             string query = "select distinct nome " +
@@ -102,7 +145,7 @@ namespace ConsigliaViaggi19App
                 citta.Add(row["nome"].ToString());
             return citta;
         }
-
+        
         public static List<string> GetTipiStrutture()
         {
             string query = "select distinct tipo " +
@@ -263,6 +306,24 @@ namespace ConsigliaViaggi19App
                 NomeCitta = row["nomeCitta"].ToString(),
                 ValutazioneMedia = double.Parse(row["valutazioneMedia"].ToString()),
                 Distanza = distanza,
+                Immagine = ConvertImage(row["immagine"])
+            };
+            return struttura;
+        }
+
+        private static Struttura CreaStruttura(DataRow row)
+        {
+            double latitudineStruttura = (double)row["latitudine"];
+            double longitudineStruttura = (double)row["longitudine"];
+            Struttura struttura = new Struttura()
+            {
+                Id = (int)row["idStruttura"],
+                Nome = row["nome"].ToString(),
+                Tipo = row["tipo"].ToString(),
+                Latitudine = latitudineStruttura,
+                Longitudine = longitudineStruttura,
+                Descrizione = row["Descrizione"].ToString(),
+                NomeCitta = row["nomeCitta"].ToString(),
                 Immagine = ConvertImage(row["immagine"])
             };
             return struttura;

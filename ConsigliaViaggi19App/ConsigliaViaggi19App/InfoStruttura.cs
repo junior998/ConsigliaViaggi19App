@@ -16,7 +16,7 @@ namespace ConsigliaViaggi19App
             menuFiltraRecensioni = new MenuFiltraRecensioni();
             menuLogin = new MenuLogin();
             aggiungiRecensione = new AggiungiRecensione();
-            premutoRecensici = false;
+            premutoRecensisci = false;
             StackLayout buttonsLayout = InitButtonsLayout();
             StackLayout labelsLayout = InitLabelsLayout();
             StackLayout mainLayout = new StackLayout()
@@ -55,11 +55,11 @@ namespace ConsigliaViaggi19App
 
         protected override void OnAppearing()
         {
-            if (premutoRecensici && UtilityUtente.IsUtenteConnesso)
+            if (premutoRecensisci && UtilityUtente.IsUtenteConnesso)
             {
                 aggiungiRecensione.IdStruttura = Struttura.Id;
                 Navigation.PushAsync(aggiungiRecensione);
-                premutoRecensici = false;
+                premutoRecensisci = false;
             }
         }
 
@@ -125,16 +125,16 @@ namespace ConsigliaViaggi19App
             recensioniButton.Clicked += EventRecensioniButtonClicked;
         }
 
-        private void EventRecensisciButtonClicked(object sender, EventArgs e)
+        private async void EventRecensisciButtonClicked(object sender, EventArgs e)
         {
-            premutoRecensici = true;
+            premutoRecensisci = true;
             if(!UtilityUtente.IsUtenteConnesso)
-                Navigation.PushAsync(menuLogin);
+                await Navigation.PushAsync(menuLogin);
             else
             {
                 aggiungiRecensione.IdStruttura = Struttura.Id;
-                premutoRecensici = false;
-                Navigation.PushAsync(aggiungiRecensione);
+                premutoRecensisci = false;
+                await Navigation.PushAsync(aggiungiRecensione);
             }
         }
 
@@ -212,6 +212,6 @@ namespace ConsigliaViaggi19App
         private MenuFiltraRecensioni menuFiltraRecensioni;
         private MenuLogin menuLogin;
         private AggiungiRecensione aggiungiRecensione;
-        private bool premutoRecensici;
+        private bool premutoRecensisci;
     }
 }

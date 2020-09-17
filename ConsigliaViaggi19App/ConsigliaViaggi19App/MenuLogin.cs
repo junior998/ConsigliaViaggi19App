@@ -38,13 +38,8 @@ namespace ConsigliaViaggi19App
 
         protected override void OnAppearing()
         {
-            if (UtilityUtente.IsUtenteConnesso)
-                Navigation.PopAsync();
-            else
-            {
-                nicknameEntry.Text = "";
-                passwordEntry.Text = "";
-            }
+            nicknameEntry.Text = "";
+            passwordEntry.Text = "";
         }
 
         private void EventClickedLoginButton(object sender, EventArgs eventArgs)

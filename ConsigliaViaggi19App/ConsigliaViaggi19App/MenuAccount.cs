@@ -12,6 +12,7 @@ namespace ConsigliaViaggi19App
     {
         public MenuAccount()
         {
+            elencoRecensioniPersonali = new ElencoRecensioniPersonali();
             primoAccesso = false;
             InitMenuLogin();
             InitNicknameLabel();
@@ -132,6 +133,12 @@ namespace ConsigliaViaggi19App
                 BackgroundColor = Color.Green,
                 TextColor = Color.White
             };
+            recensioniPersonaliButton.Clicked += EventRecensioniPersonaliButtonClicked;
+        }
+
+        private async void EventRecensioniPersonaliButtonClicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(elencoRecensioniPersonali);
         }
 
         private void InitLogoutButton()
@@ -243,6 +250,7 @@ namespace ConsigliaViaggi19App
         private Button logoutButton;
         private StackLayout stackLayoutAccessoEffettuato;
         private StackLayout stackLayoutEffettuareAccesso;
+        private ElencoRecensioniPersonali elencoRecensioniPersonali;
         private MenuLogin menuLogin;
         private bool primoAccesso;
     }
