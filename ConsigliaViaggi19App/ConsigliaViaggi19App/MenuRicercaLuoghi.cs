@@ -39,7 +39,7 @@ namespace ConsigliaViaggi19App
             {
                 try
                 {
-                    Location posizione = await GetCurrenteLocation();
+                    Location posizione = await GetCurrentLocation();
                     ParametriRicercaStrutture parametri = GetParametri();
                     parametri.PosizioneCorrente = posizione;
                     luoghiTrovati.Parametri = parametri;
@@ -81,7 +81,7 @@ namespace ConsigliaViaggi19App
             return parametri;
         }
 
-        private async Task<Location> GetCurrenteLocation()
+        private async Task<Location> GetCurrentLocation()
         {
             Location posizione = await Geolocation.GetLastKnownLocationAsync();
             if (posizione is null)

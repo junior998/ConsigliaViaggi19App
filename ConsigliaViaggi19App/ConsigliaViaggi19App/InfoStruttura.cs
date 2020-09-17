@@ -13,6 +13,7 @@ namespace ConsigliaViaggi19App
             NavigationPage.SetHasBackButton(this, false);
             Title = "Info Struttura";
             InitComponents();
+            menuFiltraRecensioni = new MenuFiltraRecensioni();
             StackLayout buttonsLayout = InitButtonsLayout();
             StackLayout labelsLayout = InitLabelsLayout();
             StackLayout mainLayout = new StackLayout()
@@ -107,6 +108,13 @@ namespace ConsigliaViaggi19App
                 VerticalOptions = LayoutOptions.FillAndExpand,
                 HorizontalOptions = LayoutOptions.FillAndExpand
             };
+            recensioniButton.Clicked += EventRecensioniButtonClicked;
+        }
+
+        private void EventRecensioniButtonClicked(object sender, EventArgs e)
+        {
+            menuFiltraRecensioni.IdStruttura = struttura.Id;
+            Navigation.PushAsync(menuFiltraRecensioni);
         }
 
         private void InitComponents()
@@ -174,5 +182,6 @@ namespace ConsigliaViaggi19App
         private Button vediSuMappaButton;
         private Button recensioniButton;
         private Struttura struttura;
+        private MenuFiltraRecensioni menuFiltraRecensioni;
     }
 }

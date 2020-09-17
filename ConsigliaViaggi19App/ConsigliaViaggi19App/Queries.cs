@@ -13,6 +13,51 @@ namespace ConsigliaViaggi19App
 {
     static class Queries
     {
+        public static List<Recensione> GetRecensioni(ParametriRicercaRecensione parametri)
+        {
+            string query = $"select * " +
+                $"from Utenti U, Recensioni R " +
+                $"where U.Nickname = R.NicknameUtente and R.idStruttura = {parametri.IdStruttura} and " +
+                $"R.valutazione >= {parametri.ValutazioneMinimo} and R.valutazione <= {parametri.ValutazioneMassimo} and " +
+                $"R.dataCreazione <= '{parametri.DataAl.ToString("yyyy-MM-dd")}' and R.dataCreazione >= '{parametri.DataDal.ToString("yyyy-MM-dd")}';";
+            DataTable table = EseguiComando(query);
+            List<Recensione> recensioni = new List<Recensione>();
+            foreach(DataRow row in table.Rows)
+            {
+                int valutazione = (int)row["Valutazione"];
+                Recensione recensione = new Recensione()
+                {
+                    IdRecensione = (int)row["idRecensione"],
+                    NicknameUtente = row["NickNameUtente"].ToString(),
+                    NomeUtente = row["Nome"].ToString(),
+                    CognomeUtente = row["Cognome"].ToString(),
+                    VisibileConNickname = (bool)row["visibileConNickname"],
+                    Commento = row["Commento"].ToString(),
+                    DataCreazione = (DateTime)row["DataCreazione"],
+                    Valutazione = (int)row["Valutazione"]
+                };
+                recensioni.Add(recensione);
+            }
+            return recensioni;
+        }
+        public static List<Tuple<int, int>> GetQuantitativoRecensioni(int idStruttura)
+        {
+            string query = $"select R.valutazione, count(R.idRecensione) as conta " +
+                $"from Strutture S, Recensioni R " +
+                $"where S.idStruttura = R.idStruttura and S.idStruttura = {idStruttura} " +
+                $"group by R.valutazione " +
+                $"order by R.valutazione desc;";
+            DataTable table = EseguiComando(query);
+            List<Tuple<int, int>> quantitaRecensioni = new List<Tuple<int, int>>();
+            foreach(DataRow row in table.Rows)
+            {
+                int valutazione =(int)row["valutazione"];
+                int conta = (int)row["conta"];
+                quantitaRecensioni.Add(new Tuple<int, int>(valutazione, conta));
+            }
+            return quantitaRecensioni;
+        }
+
         public static List<Struttura> GetLuoghiTrovati(ParametriRicercaStrutture parametri)
         {
             StringBuilder sottoQueryUno = new StringBuilder($"select S.idStruttura, S.nome, S.immagine, S.tipo, S.latitudine, " +
@@ -159,23 +204,23 @@ namespace ConsigliaViaggi19App
 
         private static List<Struttura> GetLuoghiTrovatiDaDataTable(Location posizioneCorrente, DataTable table)
         {
-            List<Struttura> struttureConsigliate = new List<Struttura>();
+            List<Struttura> strutture = new List<Struttura>();
             foreach (DataRow row in table.Rows)
-                 struttureConsigliate.Add(CreaStruttura(row, posizioneCorrente));
-            return struttureConsigliate;
+                 strutture.Add(CreaStruttura(row, posizioneCorrente));
+            return strutture;
         }
 
         private static List<Struttura> FiltraStrutturePerDistanza(Location posizioneCorrente, DataTable table, double distanzaMinima, double distanzaMassima)
         {
-            List<Struttura> struttureConsigliate = new List<Struttura>();
+            List<Struttura> strutture = new List<Struttura>();
             foreach (DataRow row in table.Rows)
             {
                 Location posizioneStruttura = new Location((double)row["latitudine"], (double)row["longitudine"]);
                 double distanza = GetDistanza(posizioneCorrente, posizioneStruttura);
                 if (distanzaMinima <= distanza && distanzaMassima >= distanza)
-                    struttureConsigliate.Add(CreaStruttura(row, posizioneCorrente));
+                    strutture.Add(CreaStruttura(row, posizioneCorrente));
             }
-            return struttureConsigliate;
+            return strutture;
         }
 
         private static List<Struttura> FiltraStrutturePerDistanza(Location posizioneCorrente, DataTable table)

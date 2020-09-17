@@ -88,8 +88,7 @@ namespace ConsigliaViaggi19App
             {
                 nomeLabel.Text = $"Nome: {riga["nome"]}";
                 cognomeLabel.Text = $"Cognome: {riga["cognome"]}";
-                DateTime time = DateTime.Parse(riga["dataIscrizione"].ToString().Split(' ')[0]);
-                iscrittoDalLabel.Text = $"Iscritto dal: {time:dd/MM/yyyy}";
+                iscrittoDalLabel.Text = $"Iscritto dal: {((DateTime)riga["dataIscrizione"]).ToString("dd/MM/yyyy")}";
             }
         }
 
