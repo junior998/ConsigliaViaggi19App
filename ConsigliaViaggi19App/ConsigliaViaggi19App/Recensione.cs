@@ -42,5 +42,6 @@ namespace ConsigliaViaggi19App
 		public string NicknameUtente { get; set; }
 		public string NomeUtente { get; set; }
 		public string CognomeUtente { get; set; }
+		public int IdStruttura { get; set; }
 	}
 }

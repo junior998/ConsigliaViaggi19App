@@ -14,6 +14,9 @@ namespace ConsigliaViaggi19App
             Title = "Info Struttura";
             InitComponents();
             menuFiltraRecensioni = new MenuFiltraRecensioni();
+            menuLogin = new MenuLogin();
+            aggiungiRecensione = new AggiungiRecensione();
+            premutoRecensici = false;
             StackLayout buttonsLayout = InitButtonsLayout();
             StackLayout labelsLayout = InitLabelsLayout();
             StackLayout mainLayout = new StackLayout()
@@ -47,6 +50,16 @@ namespace ConsigliaViaggi19App
                 distanzaLabel.Text = struttura.DistanzaTesto;
                 descrizioneLabel.Text = struttura.Descrizione;
                 immagineUno.Source = struttura.Immagine;
+            }
+        }
+
+        protected override void OnAppearing()
+        {
+            if (premutoRecensici && UtilityUtente.IsUtenteConnesso)
+            {
+                aggiungiRecensione.IdStruttura = Struttura.Id;
+                Navigation.PushAsync(aggiungiRecensione);
+                premutoRecensici = false;
             }
         }
 
@@ -90,6 +103,7 @@ namespace ConsigliaViaggi19App
                 VerticalOptions = LayoutOptions.FillAndExpand,
                 HorizontalOptions = LayoutOptions.FillAndExpand
             };
+            recensisciButton.Clicked += EventRecensisciButtonClicked;
             vediSuMappaButton = new Button()
             {
                 Text = "Vedi su mappa",
@@ -109,6 +123,19 @@ namespace ConsigliaViaggi19App
                 HorizontalOptions = LayoutOptions.FillAndExpand
             };
             recensioniButton.Clicked += EventRecensioniButtonClicked;
+        }
+
+        private void EventRecensisciButtonClicked(object sender, EventArgs e)
+        {
+            premutoRecensici = true;
+            if(!UtilityUtente.IsUtenteConnesso)
+                Navigation.PushAsync(menuLogin);
+            else
+            {
+                aggiungiRecensione.IdStruttura = Struttura.Id;
+                premutoRecensici = false;
+                Navigation.PushAsync(aggiungiRecensione);
+            }
         }
 
         private void EventRecensioniButtonClicked(object sender, EventArgs e)
@@ -183,5 +210,8 @@ namespace ConsigliaViaggi19App
         private Button recensioniButton;
         private Struttura struttura;
         private MenuFiltraRecensioni menuFiltraRecensioni;
+        private MenuLogin menuLogin;
+        private AggiungiRecensione aggiungiRecensione;
+        private bool premutoRecensici;
     }
 }

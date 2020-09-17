@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "xKOjfywyNi+5PJdxmc7PYXMmkY6jVCy6Bu10Afbm2OwczrwG2Peglm3uGA0IpNGnzeYOCeY4S2YTsTbLr3VPSQ==",
+  "dgSpecHash": "hYO6+UgHZKhH/4BCtSiE1PkP6zzh/O2xTlzJGEnjmNGDj7bEYBWXvfeuL+AlCYCZRj2w+yvCah/w1+Hjei7k2Q==",
   "success": true,
   "projectFilePath": "C:\\Users\\Giuseppe\\Desktop\\c#\\ConsigliaViaggi19App\\ConsigliaViaggi19App\\ConsigliaViaggi19App\\ConsigliaViaggi19App.csproj",
   "expectedPackageFiles": [
@@ -29,8 +29,8 @@
     "C:\\Users\\Giuseppe\\.nuget\\packages\\system.security.permissions\\4.7.0\\system.security.permissions.4.7.0.nupkg.sha512",
     "C:\\Users\\Giuseppe\\.nuget\\packages\\system.security.principal.windows\\4.7.0\\system.security.principal.windows.4.7.0.nupkg.sha512",
     "C:\\Users\\Giuseppe\\.nuget\\packages\\system.text.encoding.codepages\\4.7.0\\system.text.encoding.codepages.4.7.0.nupkg.sha512",
-    "C:\\Microsoft\\Xamarin\\NuGet\\xamarin.essentials\\1.3.1\\xamarin.essentials.1.3.1.nupkg.sha512",
-    "C:\\Microsoft\\Xamarin\\NuGet\\xamarin.forms\\4.5.0.495\\xamarin.forms.4.5.0.495.nupkg.sha512"
+    "C:\\Users\\Giuseppe\\.nuget\\packages\\xamarin.essentials\\1.5.3.2\\xamarin.essentials.1.5.3.2.nupkg.sha512",
+    "C:\\Users\\Giuseppe\\.nuget\\packages\\xamarin.forms\\4.8.0.1269\\xamarin.forms.4.8.0.1269.nupkg.sha512"
   ],
   "logs": []
 }

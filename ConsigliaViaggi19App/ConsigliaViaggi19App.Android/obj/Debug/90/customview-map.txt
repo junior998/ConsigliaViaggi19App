@@ -17,10 +17,12 @@ android.support.v7.widget.RecyclerView;C:\Users\Giuseppe\Desktop\c#\ConsigliaVia
 android.support.v7.widget.Toolbar;C:\Users\Giuseppe\Desktop\c#\ConsigliaViaggi19App\ConsigliaViaggi19App\ConsigliaViaggi19App.Android\obj\Debug\90\lp\41\jl\res\layout\rootlayout.xml
 android.support.v7.widget.Toolbar;C:\Users\Giuseppe\Desktop\c#\ConsigliaViaggi19App\ConsigliaViaggi19App\ConsigliaViaggi19App.Android\obj\Debug\90\lp\41\jl\res\layout\shellcontent.xml
 android.support.v7.widget.Toolbar;obj\Debug\90\res\layout\toolbar.xml
+attr;C:\Users\Giuseppe\Desktop\c#\ConsigliaViaggi19App\ConsigliaViaggi19App\ConsigliaViaggi19App.Android\obj\Debug\90\lp\41\jl\res\values\attrs.xml
 background;obj\Debug\90\res\mipmap-anydpi-v26\icon.xml
 background;obj\Debug\90\res\mipmap-anydpi-v26\icon_round.xml
 cache-path;C:\Users\Giuseppe\Desktop\c#\ConsigliaViaggi19App\ConsigliaViaggi19App\ConsigliaViaggi19App.Android\obj\Debug\90\lp\40\jl\res\xml\xamarin_essentials_fileprovider_file_paths.xml
 color;obj\Debug\90\res\values\colors.xml
+declare-styleable;C:\Users\Giuseppe\Desktop\c#\ConsigliaViaggi19App\ConsigliaViaggi19App\ConsigliaViaggi19App.Android\obj\Debug\90\lp\41\jl\res\values\attrs.xml
 external-cache-path;C:\Users\Giuseppe\Desktop\c#\ConsigliaViaggi19App\ConsigliaViaggi19App\ConsigliaViaggi19App.Android\obj\Debug\90\lp\40\jl\res\xml\xamarin_essentials_fileprovider_file_paths.xml
 external-path;C:\Users\Giuseppe\Desktop\c#\ConsigliaViaggi19App\ConsigliaViaggi19App\ConsigliaViaggi19App.Android\obj\Debug\90\lp\40\jl\res\xml\xamarin_essentials_fileprovider_file_paths.xml
 foreground;obj\Debug\90\res\mipmap-anydpi-v26\icon.xml
@@ -31,6 +33,8 @@ item;obj\Debug\90\res\values\styles.xml
 LinearLayout;C:\Users\Giuseppe\Desktop\c#\ConsigliaViaggi19App\ConsigliaViaggi19App\ConsigliaViaggi19App.Android\obj\Debug\90\lp\41\jl\res\layout\bottomtablayout.xml
 paths;C:\Users\Giuseppe\Desktop\c#\ConsigliaViaggi19App\ConsigliaViaggi19App\ConsigliaViaggi19App.Android\obj\Debug\90\lp\40\jl\res\xml\xamarin_essentials_fileprovider_file_paths.xml
 resources;C:\Users\Giuseppe\Desktop\c#\ConsigliaViaggi19App\ConsigliaViaggi19App\ConsigliaViaggi19App.Android\obj\Debug\90\lp\1\jl\res\values\strings.xml
+resources;C:\Users\Giuseppe\Desktop\c#\ConsigliaViaggi19App\ConsigliaViaggi19App\ConsigliaViaggi19App.Android\obj\Debug\90\lp\41\jl\res\values\attrs.xml
+resources;C:\Users\Giuseppe\Desktop\c#\ConsigliaViaggi19App\ConsigliaViaggi19App\ConsigliaViaggi19App.Android\obj\Debug\90\lp\41\jl\res\values\strings.xml
 resources;C:\Users\Giuseppe\Desktop\c#\ConsigliaViaggi19App\ConsigliaViaggi19App\ConsigliaViaggi19App.Android\obj\Debug\90\lp\41\jl\res\values\styles.xml
 resources;obj\Debug\90\res\values\colors.xml
 resources;obj\Debug\90\res\values\styles.xml
@@ -39,6 +43,7 @@ set;C:\Users\Giuseppe\Desktop\c#\ConsigliaViaggi19App\ConsigliaViaggi19App\Consi
 set;C:\Users\Giuseppe\Desktop\c#\ConsigliaViaggi19App\ConsigliaViaggi19App\ConsigliaViaggi19App.Android\obj\Debug\90\lp\41\jl\res\anim\exittoleft.xml
 set;C:\Users\Giuseppe\Desktop\c#\ConsigliaViaggi19App\ConsigliaViaggi19App\ConsigliaViaggi19App.Android\obj\Debug\90\lp\41\jl\res\anim\exittoright.xml
 string;C:\Users\Giuseppe\Desktop\c#\ConsigliaViaggi19App\ConsigliaViaggi19App\ConsigliaViaggi19App.Android\obj\Debug\90\lp\1\jl\res\values\strings.xml
+string;C:\Users\Giuseppe\Desktop\c#\ConsigliaViaggi19App\ConsigliaViaggi19App\ConsigliaViaggi19App.Android\obj\Debug\90\lp\41\jl\res\values\strings.xml
 style;C:\Users\Giuseppe\Desktop\c#\ConsigliaViaggi19App\ConsigliaViaggi19App\ConsigliaViaggi19App.Android\obj\Debug\90\lp\41\jl\res\values\styles.xml
 style;obj\Debug\90\res\values\styles.xml
 translate;C:\Users\Giuseppe\Desktop\c#\ConsigliaViaggi19App\ConsigliaViaggi19App\ConsigliaViaggi19App.Android\obj\Debug\90\lp\41\jl\res\anim\enterfromleft.xml

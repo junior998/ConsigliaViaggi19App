@@ -54,9 +54,10 @@ namespace ConsigliaViaggi19App
 
         private ParametriRicercaStrutture GetParametri()
         {
+
             ParametriRicercaStrutture parametri = new ParametriRicercaStrutture()
             {
-                NomeStruttura = nomeStruttura.Text.ToLower(),
+                NomeStruttura = (nomeStruttura.Text is null) ? "" : nomeStruttura.Text.ToLower(),
                 TipoStruttura = tipoStruttura.ItemsSource[tipoStruttura.SelectedIndex].ToString(),
                 Citta = citta.ItemsSource[citta.SelectedIndex].ToString(),
                 IsFiltroPosizioneAttivo = false

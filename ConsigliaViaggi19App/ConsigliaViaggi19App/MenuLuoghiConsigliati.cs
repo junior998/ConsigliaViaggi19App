@@ -8,6 +8,7 @@ using Xamarin.Forms;
 using Xamarin.Essentials;
 using System.Runtime.InteropServices;
 using System.Data.SqlClient;
+using System.Threading.Tasks;
 
 namespace ConsigliaViaggi19App
 {
@@ -15,10 +16,7 @@ namespace ConsigliaViaggi19App
     {
         public MenuLuoghiConsigliati()
         {
-            InitPosizione();
-            InitStruttureListView();
-            infoStruttura = new InfoStruttura();
-            Content = struttureListView;
+            Init();
         }
 
         private void EventItemTapped(object sender, ItemTappedEventArgs e)
@@ -45,7 +43,7 @@ namespace ConsigliaViaggi19App
             struttureListView.ItemTapped += EventItemTapped;
         }
 
-        private async void InitPosizione()
+        private async Task InitPosizione()
         {
             try
             {
@@ -64,6 +62,14 @@ namespace ConsigliaViaggi19App
                 await DisplayAlert("Errore", "Impossibile trovare la posizione corrente", "Ok");
                 Process.GetCurrentProcess().Kill();
             }
+        }
+
+        private async void Init()
+        {
+            await InitPosizione();
+            InitStruttureListView();
+            infoStruttura = new InfoStruttura();
+            Content = struttureListView;
         }
 
         private ListView struttureListView;

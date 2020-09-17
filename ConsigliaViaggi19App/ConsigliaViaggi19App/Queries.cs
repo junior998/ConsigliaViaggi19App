@@ -13,6 +13,14 @@ namespace ConsigliaViaggi19App
 {
     static class Queries
     {
+        public static void CaricaRecensione(Recensione recensione)
+        {
+            int visibileConNickaname = (recensione.VisibileConNickname) ? 1 : 0;
+            string query = "insert into Recensioni (valutazione, commento, stato, visibileConNickname, dataCreazione, nicknameUtente, idStruttura) values " +
+                $"({recensione.Valutazione}, '{recensione.Commento}', 'in attesa', {visibileConNickaname}, '{recensione.DataCreazione}', " +
+                $"'{recensione.NicknameUtente}', {recensione.IdStruttura})";
+            EseguiModifica(query);
+        }
         public static List<Recensione> GetRecensioni(ParametriRicercaRecensione parametri)
         {
             string query = $"select * " +
@@ -24,7 +32,6 @@ namespace ConsigliaViaggi19App
             List<Recensione> recensioni = new List<Recensione>();
             foreach(DataRow row in table.Rows)
             {
-                int valutazione = (int)row["Valutazione"];
                 Recensione recensione = new Recensione()
                 {
                     IdRecensione = (int)row["idRecensione"],
@@ -70,8 +77,11 @@ namespace ConsigliaViaggi19App
                 sottoQueryUno.Append($"and S.Tipo = '{parametri.TipoStruttura}' ");
             if (parametri.Citta != "Posizione corrente")
                 sottoQueryUno.Append($"and C.Nome = '{parametri.Citta}' ");
-            StringBuilder sottoQueryDue = new StringBuilder($"select S.idStruttura, ISNULL(avg(R.valutazione), 0) as valutazioneMedia " +
-               "from Strutture S left outer join Recensioni R on S.idStruttura = R.idStruttura " +
+            StringBuilder sottoQueryDue = new StringBuilder($"select S.idStruttura, CAST(ISNULL(avg(CAST(TMP.valutazione as DECIMAL(10, 2))), 0) as DECIMAL(10, 2)) as valutazioneMedia " +
+               "from Strutture S left outer join " +
+               "(select * " +
+               "from Recensioni R " +
+               "where R.stato = 'approvato') TMP on S.idStruttura = TMP.idStruttura " +
                "group by S.idStruttura");
             string query = "select * " +
                 $"from ({sottoQueryUno}) TMP1, ({sottoQueryDue}) TMP2 " +
@@ -111,8 +121,10 @@ namespace ConsigliaViaggi19App
                            "S.longitudine, S.descrizione, C.nome as nomeCitta " +
                            "from Strutture S, Citta C " +
                            "where S.idCitta = C.idCitta) TMP1, " +
-                           "(select S.idStruttura, ISNULL(avg(R.valutazione), 0) as valutazioneMedia " +
-                           "from Strutture S left outer join Recensioni R on S.idStruttura = R.idStruttura " +
+                           "(select S.idStruttura, CAST(ISNULL(avg(CAST(TMP.valutazione as DECIMAL(10, 2))), 0) as DECIMAL(10, 2)) as valutazioneMedia " +
+                           "from Strutture S left outer join(select * " +
+                           "from Recensioni R " +
+                           "where R.stato = 'approvato') TMP on S.idStruttura = TMP.idStruttura " +
                            "group by S.idStruttura) TMP2 " +
                            "where TMP1.idStruttura = TMP2.idStruttura " +
                            "order by TMP2.valutazioneMedia desc;";
@@ -131,10 +143,8 @@ namespace ConsigliaViaggi19App
         public static DataTable GetLuoghiRecensiti(string nickname)
         {
             string query = "select count(*) as luoghiRecensiti " +
-                           "from(select U.nickname, U.nome, U.cognome, U.dataIscrizione " +
-                                 "from Utenti U, Recensioni R " +
-                                $"where  U.nickname = R.nicknameUtente and U.nickname = '{nickname.Replace("'", "''")}' " +
-                                "group by U.nickname, U.nome, U.cognome, U.dataIscrizione) as TMP ";
+                           "from Recensioni R " +
+                           $"where R.nicknameUtente = '{nickname.Replace("'", "''")}'";
             return EseguiComando(query);
         }
 

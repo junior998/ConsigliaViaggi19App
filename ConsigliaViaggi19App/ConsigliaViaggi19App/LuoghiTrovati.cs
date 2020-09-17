@@ -41,6 +41,7 @@ namespace ConsigliaViaggi19App
             catch(SqlException)
             {
                 DisplayAlert("Errore", "Connessione internet assente", "Ok");
+                Navigation.PopAsync();
             }
         }
 

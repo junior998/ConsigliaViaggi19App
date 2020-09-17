@@ -3,12 +3,40 @@ using System.Collections.Generic;
 using System.Text;
 using Xamarin.Forms;
 using System.Data.SqlClient;
+using Xamarin.Essentials;
+using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace ConsigliaViaggi19App
 {
     class MenuPrincipale : TabbedPage
     {
         public MenuPrincipale()
+        {
+            Init();
+        }
+
+        private async void Init()
+        {
+            await CheckPermissionLocalization();
+            InitComponents();
+        }
+
+        private async Task CheckPermissionLocalization()
+        {
+            var status = await Permissions.CheckStatusAsync<Permissions.LocationWhenInUse>();
+            if(status != PermissionStatus.Granted)
+            {
+                status = await Permissions.RequestAsync<Permissions.LocationWhenInUse>();
+                if(status != PermissionStatus.Granted)
+                {
+                    await DisplayAlert("Errore", "Permesso alla posizione negato", "Ok");
+                    Process.GetCurrentProcess().Kill();
+                }
+            }
+        }
+
+        private void InitComponents()
         {
             menuLuoghiConsigliati = new MenuLuoghiConsigliati()
             {

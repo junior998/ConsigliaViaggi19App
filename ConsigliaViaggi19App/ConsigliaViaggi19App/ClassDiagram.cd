@@ -1,52 +1,72 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
-  <Class Name="ConsigliaViaggi19App.MenuRicercaLuoghi">
-    <Position X="2.75" Y="1.75" Width="5.75" />
+  <Class Name="ConsigliaViaggi19App.InfoStruttura">
+    <Position X="6.25" Y="4" Width="4.25" />
     <TypeIdentifier>
-      <HashCode>QACAIEABCYgAAwAggCAAEIIPUQADAKgAAADQTFDYBBA=</HashCode>
-      <FileName>MenuRicercaLuoghi.cs</FileName>
+      <HashCode>AAAAAAAAgAAAAIAgoAGACgAAAIBgBAAAADIAAQAIAAA=</HashCode>
+      <FileName>InfoStruttura.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
-      <Field Name="luoghiTrovati" />
+      <Field Name="menuFiltraRecensioni" />
     </ShowAsAssociation>
   </Class>
-  <Class Name="ConsigliaViaggi19App.Queries">
-    <Position X="16.5" Y="1.25" Width="10" />
+  <Class Name="ConsigliaViaggi19App.MenuFiltraRecensioni">
+    <Position X="13.75" Y="1" Width="6.75" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAA4AAAAAAAgBAAAAYAABAAAAABCAhQAAAQAoA=</HashCode>
-      <FileName>Queries.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="ConsigliaViaggi19App.StruttureListItemCell">
-    <Position X="10.5" Y="8.25" Width="2" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>StruttureListItemCell.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="ConsigliaViaggi19App.LuoghiTrovati">
-    <Position X="15.75" Y="7.25" Width="5.75" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAiAAAAAAAAAAAAAABAAAAEAAAAAAIAAAAA=</HashCode>
-      <FileName>LuoghiTrovati.cs</FileName>
+      <HashCode>AIBAhEAAAYqiACDyFAIAAAnUAkQgAZDaFAAAAAAIWJU=</HashCode>
+      <FileName>MenuFiltraRecensioni.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
-      <Field Name="infoStruttura" />
+      <Field Name="recensioniTrovate" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="ConsigliaViaggi19App.RecensioniTrovate">
+    <Position X="23" Y="1.75" Width="4.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAiAAQAAAAAAAAAQAAAAAAEAAAAAAIAAAAA=</HashCode>
+      <FileName>RecensioniTrovate.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="visualizzaRecensione" />
       <Property Name="Parametri" />
     </ShowAsAssociation>
   </Class>
-  <Class Name="ConsigliaViaggi19App.ParametriRicercaStrutture">
-    <Position X="10.5" Y="4.25" Width="4" />
+  <Class Name="ConsigliaViaggi19App.VisualizzaRecensione">
+    <Position X="23.5" Y="6.25" Width="3.5" />
     <TypeIdentifier>
-      <HashCode>AAAAhAAIAABgAAAAAAAAAAAACAAAAAAAABAAIAAIAAA=</HashCode>
-      <FileName>ParametriRicercaStrutture.cs</FileName>
+      <HashCode>gAQAAAAAgggAAAgAAAAAAAAAAAAQACAAgAAAAAABADA=</HashCode>
+      <FileName>VisualizzaRecensione.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Recensione" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="ConsigliaViaggi19App.Queries">
+    <Position X="6" Y="13.75" Width="5.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAA4AAAAAAAgBAAAAYAABAAAAIBCAjQAAAQAoA=</HashCode>
+      <FileName>Queries.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ConsigliaViaggi19App.InfoStruttura" Collapsed="true">
-    <Position X="17.75" Y="10.75" Width="1.5" />
+  <Class Name="ConsigliaViaggi19App.ParametriRicercaRecensione">
+    <Position X="33" Y="8.25" Width="3" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAgAAAAIAgoAGACAAAAIBgBAAAACIAAQAIAAA=</HashCode>
-      <FileName>InfoStruttura.cs</FileName>
+      <HashCode>gAAAAAAAAAAQAAACAAAAAAAAAAAAAAAAAAAAAAAAEBA=</HashCode>
+      <FileName>ParametriRicercaRecensione.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConsigliaViaggi19App.Recensione">
+    <Position X="23.5" Y="12.25" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>AgAEAAAAQAAAAAAgBAAAQAgAAAAABAEACAgAAAAAAAA=</HashCode>
+      <FileName>Recensione.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConsigliaViaggi19App.RecensioniListITemCell">
+    <Position X="29" Y="6.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>RecensioniListITemCell.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />

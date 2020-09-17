@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "AAL83aB6E8gNO3Z5Z4fW+w1g2rCGvMFLG/OYAcVXkjwdlJRJ5b8wAwt1Q6v4coLwimQ0G+rgLmhErXgmVLDhgw==",
+  "dgSpecHash": "4id15MYc6SX/NvbHnOKwfrO28u5TqqL2Ns8eEBj1SsjTZgzZByof3TOVLKODHlIeoEgsNQaOzX9bup0NmIxHxA==",
   "success": true,
   "projectFilePath": "C:\\Users\\Giuseppe\\Desktop\\c#\\ConsigliaViaggi19App\\ConsigliaViaggi19App\\ConsigliaViaggi19App.iOS\\ConsigliaViaggi19App.iOS.csproj",
   "expectedPackageFiles": [
@@ -13,13 +13,12 @@
     "C:\\Users\\Giuseppe\\.nuget\\packages\\system.configuration.configurationmanager\\4.7.0\\system.configuration.configurationmanager.4.7.0.nupkg.sha512",
     "C:\\Users\\Giuseppe\\.nuget\\packages\\system.data.sqlclient\\4.8.1\\system.data.sqlclient.4.8.1.nupkg.sha512",
     "C:\\Users\\Giuseppe\\.nuget\\packages\\system.memory\\4.5.3\\system.memory.4.5.3.nupkg.sha512",
-    "C:\\Users\\Giuseppe\\.nuget\\packages\\system.numerics.vectors\\4.5.0\\system.numerics.vectors.4.5.0.nupkg.sha512",
     "C:\\Users\\Giuseppe\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\4.5.2\\system.runtime.compilerservices.unsafe.4.5.2.nupkg.sha512",
     "C:\\Users\\Giuseppe\\.nuget\\packages\\system.security.accesscontrol\\4.7.0\\system.security.accesscontrol.4.7.0.nupkg.sha512",
     "C:\\Users\\Giuseppe\\.nuget\\packages\\system.security.permissions\\4.7.0\\system.security.permissions.4.7.0.nupkg.sha512",
     "C:\\Users\\Giuseppe\\.nuget\\packages\\system.security.principal.windows\\4.7.0\\system.security.principal.windows.4.7.0.nupkg.sha512",
-    "C:\\Microsoft\\Xamarin\\NuGet\\xamarin.essentials\\1.3.1\\xamarin.essentials.1.3.1.nupkg.sha512",
-    "C:\\Microsoft\\Xamarin\\NuGet\\xamarin.forms\\4.5.0.495\\xamarin.forms.4.5.0.495.nupkg.sha512"
+    "C:\\Users\\Giuseppe\\.nuget\\packages\\xamarin.essentials\\1.5.3.2\\xamarin.essentials.1.5.3.2.nupkg.sha512",
+    "C:\\Users\\Giuseppe\\.nuget\\packages\\xamarin.forms\\4.8.0.1269\\xamarin.forms.4.8.0.1269.nupkg.sha512"
   ],
   "logs": []
 }

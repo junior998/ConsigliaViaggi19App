@@ -24,12 +24,13 @@ namespace ConsigliaViaggi19App
             try
             {
                 List<Recensione> recensioni = Queries.GetRecensioni(Parametri);
-                if (recensioni.Count == 0)
+                if (recensioni.Count != 0)
+                    listView.ItemsSource = recensioni;
+                else
                 {
                     DisplayAlert("Errore", "Nessuna recensione soddisfa i parametri di ricerca", "Ok");
                     Navigation.PopAsync();
                 }
-                listView.ItemsSource = recensioni;
             }
             catch (SqlException)
             {
