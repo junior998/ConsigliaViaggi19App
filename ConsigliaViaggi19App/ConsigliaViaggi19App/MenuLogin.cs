@@ -52,9 +52,9 @@ namespace ConsigliaViaggi19App
             try
             {
                 if (nicknameEntry.Text.Length == 0 || passwordEntry.Text.Length <= UtilityUtente.LunghezzaPassword)
-                    DisplayAlert("Errore", "Nickname o password non corretti", "Ok");
+                    DisplayAlert("Errore", "Inserire Nickname e password validi", "Ok");
                 else if (!Queries.IsAccountEsistente(nicknameEntry.Text, passwordEntry.Text))
-                    DisplayAlert("Errore", "Account inesistente", "Ok");
+                    DisplayAlert("Errore", "Nickname o password non corretti", "Ok");
                 else
                 {
                     UtilityUtente.IsUtenteConnesso = true;

@@ -67,7 +67,7 @@ namespace ConsigliaViaggi19App
                     DisplayAlert("Errore", "Nickname già esistente", "Ok");
                 else
                 {
-                    Queries.CreaAccount(nomeEntry.Text.ToLower(), cognomeEntry.Text.ToLower(), nicknameEntry.Text, passwordEntry.Text);
+                    Queries.CreaAccount(nomeEntry.Text.ToUpper(), cognomeEntry.Text.ToUpper(), nicknameEntry.Text, passwordEntry.Text);
                     UtilityUtente.IsUtenteConnesso = true;
                     UtilityUtente.Nickname = nicknameEntry.Text;
                     DisplayAlert("Iscrizione", "Iscrizione all'app avvenuta con successo", "Ok");

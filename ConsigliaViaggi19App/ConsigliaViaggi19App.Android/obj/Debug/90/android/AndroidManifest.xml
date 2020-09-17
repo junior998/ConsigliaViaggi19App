@@ -4,6 +4,11 @@
   <uses-permission android:name="android.permission.INTERNET" />
   <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
   <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+  <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+  <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+  <uses-feature android:name="android.hardware.location" android:required="false" />
+  <uses-feature android:name="android.hardware.location.gps" android:required="false" />
+  <uses-feature android:name="android.hardware.location.network" android:required="false" />
   <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
   <application android:label="ConsigliaViaggi19App.Android" android:name="android.app.Application" android:allowBackup="true" android:icon="@mipmap/icon" android:debuggable="true">
     <activity android:configChanges="orientation|screenSize" android:icon="@mipmap/icon" android:label="ConsigliaViaggi19App" android:theme="@style/MainTheme" android:name="crc64c54aeadf5e96e1cb.MainActivity">

@@ -74,6 +74,7 @@ namespace ConsigliaViaggi19App
         {
             UtilityUtente.IsUtenteConnesso = false;
             Content = stackLayoutEffettuareAccesso;
+            primoAccesso = false;
         }
 
         private void EventClickedLoginButton(object sendet, EventArgs args)
@@ -87,7 +88,8 @@ namespace ConsigliaViaggi19App
             {
                 nomeLabel.Text = $"Nome: {riga["nome"]}";
                 cognomeLabel.Text = $"Cognome: {riga["cognome"]}";
-                iscrittoDalLabel.Text = $"Iscritto dal: {riga["dataIscrizione"]}";
+                DateTime time = DateTime.Parse(riga["dataIscrizione"].ToString().Split(' ')[0]);
+                iscrittoDalLabel.Text = $"Iscritto dal: {time:dd/MM/yyyy}";
             }
         }
 
