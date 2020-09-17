@@ -29,7 +29,8 @@ namespace ConsigliaViaggi19App
             string query = "select S.idStruttura, S.nome, S.immagine, R.valutazione, R.commento, R.stato, R.visibileConNickname, R.dataCreazione " +
                             "from Recensioni R, Strutture S " +
                             "where R.idStruttura = S.idStruttura and " +
-                            $"R.nicknameUtente = '{nicknameUtente.Replace("'", "''")}'";
+                            $"R.nicknameUtente = '{nicknameUtente.Replace("'", "''")}' " +
+                            $"order by R.dataCreazione desc;";
             DataTable table = EseguiComando(query);
             List<RecensionePersonale> recensioniPersonali = new List<RecensionePersonale>();
             foreach(DataRow row in table.Rows)
@@ -57,7 +58,7 @@ namespace ConsigliaViaggi19App
         {
             int visibileConNickaname = (recensione.VisibileConNickname) ? 1 : 0;
             string query = "insert into Recensioni (valutazione, commento, stato, visibileConNickname, dataCreazione, nicknameUtente, idStruttura) values " +
-                $"({recensione.Valutazione}, '{recensione.Commento}', 'in attesa', {visibileConNickaname}, '{recensione.DataCreazione}', " +
+                $"({recensione.Valutazione}, '{recensione.Commento}', 'in attesa', {visibileConNickaname}, '{recensione.DataCreazione.ToString("MM/dd/yyyy")}', " +
                 $"'{recensione.NicknameUtente}', {recensione.IdStruttura})";
             EseguiModifica(query);
         }
@@ -68,7 +69,8 @@ namespace ConsigliaViaggi19App
                 $"from Utenti U, Recensioni R " +
                 $"where U.Nickname = R.NicknameUtente and R.idStruttura = {parametri.IdStruttura} and " +
                 $"R.valutazione >= {parametri.ValutazioneMinimo} and R.valutazione <= {parametri.ValutazioneMassimo} and " +
-                $"R.dataCreazione <= '{parametri.DataAl.ToString("yyyy-MM-dd")}' and R.dataCreazione >= '{parametri.DataDal.ToString("yyyy-MM-dd")}';";
+                $"R.dataCreazione <= '{parametri.DataAl.ToString("yyyy-MM-dd")}' and R.dataCreazione >= '{parametri.DataDal.ToString("yyyy-MM-dd")}' " +
+                $"and R.stato = 'approvato';";
             DataTable table = EseguiComando(query);
             List<Recensione> recensioni = new List<Recensione>();
             foreach(DataRow row in table.Rows)
@@ -93,7 +95,7 @@ namespace ConsigliaViaggi19App
         {
             string query = $"select R.valutazione, count(R.idRecensione) as conta " +
                 $"from Strutture S, Recensioni R " +
-                $"where S.idStruttura = R.idStruttura and S.idStruttura = {idStruttura} " +
+                $"where S.idStruttura = R.idStruttura and S.idStruttura = {idStruttura} and R.stato = 'approvato' " +
                 $"group by R.valutazione " +
                 $"order by R.valutazione desc;";
             DataTable table = EseguiComando(query);
@@ -181,11 +183,11 @@ namespace ConsigliaViaggi19App
                             "from(select U.nickname, U.nome, U.cognome, U.dataIscrizione " +
                                   "from Utenti U " +
                                   $"where U.nickname = '{nickname.Replace("'", "''")}') TMP1, " +
-                                  "(select R.nicknameUtente, count(*) as luoghiRecensiti " +
-                                   "from Recensioni R " +
-                                   $"where R.nicknameUtente = '{nickname.Replace("'", "''")}' " +
-                                   "group by R.nicknameUtente) TMP2 " +
-                            "where TMP1.nickname = TMP2.nicknameUTente;";
+                                  "(select U.nickname, count(R.idRecensione) as luoghiRecensiti " +
+                                   "from Utenti U left outer join Recensioni R on U.nickname = R.nicknameUtente " +
+                                   $"where U.nickname = '{nickname.Replace("'", "''")}' " +
+                                   "group by U.nickname) TMP2 " +
+                            "where TMP1.nickname = TMP2.nickname;";
             DataTable table = EseguiComando(query);
             DataRow row = table.Rows[0];
             DettagliUtente dettagliUtente = new DettagliUtente()
@@ -233,17 +235,14 @@ namespace ConsigliaViaggi19App
         {
             string query = "insert into Utenti (nome, cognome, nickname, password, dataIscrizione) values " +
                            $"('{nome.Replace("'", "''")}', '{cognome.Replace("'", "''")}', '{nickname.Replace("'", "''")}', " +
-                           $"'{password.Replace("'", "''")}', '{DateTime.Now}')";
+                           $"'{password.Replace("'", "''")}', '{DateTime.Now.ToString("MM/dd/yyyy")}')";
             EseguiModifica(query);
         }
 
         private static void EseguiModifica(string query)
         {
             SqlConnection connection = new SqlConnection(stringConnection);
-            SqlCommand command = new SqlCommand(query, connection)
-            {
-                CommandTimeout = 15
-            };
+            SqlCommand command = new SqlCommand(query, connection);
             connection.Open();
             command.ExecuteNonQuery();
             connection.Dispose();
@@ -252,10 +251,7 @@ namespace ConsigliaViaggi19App
         private static DataTable EseguiComando(string query)
         {
             SqlConnection connection = new SqlConnection(stringConnection);
-            SqlCommand command = new SqlCommand(query, connection)
-            {
-                CommandTimeout = 15
-            };
+            SqlCommand command = new SqlCommand(query, connection);
             connection.Open();
             DataTable table = new DataTable();
             table.Load(command.ExecuteReader());

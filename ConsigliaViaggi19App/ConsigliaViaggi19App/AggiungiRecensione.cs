@@ -90,7 +90,7 @@ namespace ConsigliaViaggi19App
         private async void EventRecensisciClicked(object sender, EventArgs e)
         {
             if (!CheckCorrettezzaRecensione())
-                await DisplayAlert("Errore", "Inserire valutazione e commento testuale", "Ok");
+                await DisplayAlert("Errore", $"Inserire valutazione e commento testuale almeno lungo {LUNGHEZZA_MINIMA_COMMENTO} caratteri", "Ok");
             else
             {
                 bool risposta = await DisplayAlert("Attenzione", "Sei sicuro di voler richiedere la pubblicazione della recensione?", "si", "no");

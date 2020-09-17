@@ -13,6 +13,7 @@ namespace ConsigliaViaggi19App
     {
         public MenuRicercaLuoghi()
         {
+            isItAppeared = false;
             InitComponents();
             luoghiTrovati = new LuoghiTrovati();
             Frame mainFrame = GetMainFrame();
@@ -28,7 +29,28 @@ namespace ConsigliaViaggi19App
                     valutazioneFrame,
                 }
             };
-            Content = layout;
+            Content = new ScrollView()
+            {
+                Content = layout
+            };
+        }
+
+        protected override async void OnAppearing()
+        {
+            if(!isItAppeared)
+            {
+                isItAppeared = true;
+                try
+                {
+                    ImpostaCittaDalDatabase();
+                    ImpostaStruttureDalDatabase();
+                }
+                catch (SqlException)
+                {
+                    await DisplayAlert("Errore", "Connessione internet assente", "Ok");
+                    Process.GetCurrentProcess().Kill();
+                }
+            }
         }
 
         private async void EventCercaClicked(object sender, EventArgs e)
@@ -105,7 +127,7 @@ namespace ConsigliaViaggi19App
         {
             if(distanzaMassimaEntry.IsEnabled && distanzaMinimaEntry.IsEnabled)
             {
-                if (distanzaMinimaEntry.Text is null || distanzaMassimaEntry.Text is null)
+                if (distanzaMinimaEntry.Text == "" || distanzaMassimaEntry.Text == "")
                     return false;
                 double distanzaMinima = double.Parse(distanzaMinimaEntry.Text);
                 double distanzaMassima = double.Parse(distanzaMassimaEntry.Text);
@@ -185,7 +207,7 @@ namespace ConsigliaViaggi19App
                 Placeholder = "Nome Struttura",
                 HorizontalOptions = LayoutOptions.Fill,
                 TextColor = Color.DarkGreen,
-                //Text = ""
+                Text = ""
             };
         }
 
@@ -197,19 +219,6 @@ namespace ConsigliaViaggi19App
                 HorizontalOptions = LayoutOptions.Fill,
                 TextColor = Color.DarkGreen
             };
-            List<string> tipiStrutture = null;
-            try
-            {
-                tipiStrutture = Queries.GetTipiStrutture();
-            }
-            catch (SqlException)
-            {
-                DisplayAlert("Errore", "Connessione internet assente", "Ok");
-                Process.GetCurrentProcess().Kill();
-            }
-            tipiStrutture.Add("Qualsiasi struttura");
-            tipoStruttura.ItemsSource = tipiStrutture;
-            tipoStruttura.SelectedIndex = tipoStruttura.ItemsSource.Count - 1;
         }
 
         private void InitCitta()
@@ -221,19 +230,6 @@ namespace ConsigliaViaggi19App
                 TextColor = Color.DarkGreen
             };
             citta.SelectedIndexChanged += EventCittaSelectedIndexChanged;
-            List<string> listaCitta = null;
-            try
-            {
-                listaCitta = Queries.GetCitta();
-            }
-            catch(SqlException)
-            {
-                DisplayAlert("Errore", "Connessione internet assente", "Ok");
-                Process.GetCurrentProcess().Kill();
-            }
-            listaCitta.Add("Posizione corrente");
-            citta.ItemsSource = listaCitta;
-            citta.SelectedIndex = citta.ItemsSource.Count - 1;
         }
 
         private void InitDistanzaMinimaLabel()
@@ -265,7 +261,8 @@ namespace ConsigliaViaggi19App
                 Placeholder = "km",
                 Keyboard = Keyboard.Numeric,
                 WidthRequest = 150,
-                TextColor = Color.DarkGreen
+                TextColor = Color.DarkGreen,
+                Text = ""
             };
         }
 
@@ -276,7 +273,8 @@ namespace ConsigliaViaggi19App
                 Placeholder = "km",
                 Keyboard = Keyboard.Numeric,
                 WidthRequest = 150,
-                TextColor = Color.DarkGreen
+                TextColor = Color.DarkGreen,
+                Text = ""
             };
         }
 
@@ -336,7 +334,8 @@ namespace ConsigliaViaggi19App
                 ItemsSource = new object[] { "Nessuna Valutazione", 1, 2, 3, 4, 5 },
                 WidthRequest = 180,
                 IsEnabled = false,
-                TextColor = Color.DarkGreen
+                TextColor = Color.DarkGreen,
+                SelectedIndex = 0
             };
         }
 
@@ -348,7 +347,8 @@ namespace ConsigliaViaggi19App
                 ItemsSource = new object[] { "Nessuna Valutazione", 1, 2, 3, 4, 5 },
                 WidthRequest = 180,
                 IsEnabled = false,
-                TextColor = Color.DarkGreen
+                TextColor = Color.DarkGreen,
+                SelectedIndex = 5
             };
         }
 
@@ -360,6 +360,22 @@ namespace ConsigliaViaggi19App
                 TextColor = Color.DarkGreen,
                 FontAttributes = FontAttributes.Bold
             };
+        }
+
+        private void ImpostaStruttureDalDatabase()
+        {
+            List<string> tipiStrutture = Queries.GetTipiStrutture();
+            tipiStrutture.Add("Qualsiasi struttura");
+            tipoStruttura.ItemsSource = tipiStrutture;
+            tipoStruttura.SelectedIndex = tipoStruttura.ItemsSource.Count - 1;
+        }
+
+        private void ImpostaCittaDalDatabase()
+        {
+            List<string> listaCitta = Queries.GetCitta();
+            listaCitta.Add("Posizione corrente");
+            citta.ItemsSource = listaCitta;
+            citta.SelectedIndex = citta.ItemsSource.Count - 1;
         }
 
         private void InitComponentiValutazioneAttivi()
@@ -525,5 +541,6 @@ namespace ConsigliaViaggi19App
         private Picker valutazioneMediaMassimaPicker;
         private LuoghiTrovati luoghiTrovati;
         private Button cerca;
+        private bool isItAppeared;
     }
 }

@@ -36,10 +36,15 @@ namespace ConsigliaViaggi19App
             NavigationPage.SetHasBackButton(this, false);
         }
 
-        protected override void OnAppearing()
+        protected async override void OnAppearing()
         {
-            nicknameEntry.Text = "";
-            passwordEntry.Text = "";
+            if (UtilityUtente.IsUtenteConnesso)
+                await Navigation.PopAsync();
+            else
+            {
+                nicknameEntry.Text = "";
+                passwordEntry.Text = "";
+            }
         }
 
         private void EventClickedLoginButton(object sender, EventArgs eventArgs)

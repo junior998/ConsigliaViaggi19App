@@ -16,7 +16,31 @@ namespace ConsigliaViaggi19App
     {
         public MenuLuoghiConsigliati()
         {
+            isItAppeared = false;
             Init();
+        }
+
+        protected async override void OnAppearing()
+        {
+            if(!isItAppeared)
+            {
+                isItAppeared = true;
+                try
+                {
+                    await InitPosizione();
+                    struttureListView.ItemsSource = Queries.GetStruttureConsigliate(posizione);
+                }
+                catch (SqlException)
+                {
+                    await DisplayAlert("Errore", "Connessione internet assente", "Ok");
+                    Process.GetCurrentProcess().Kill();
+                }
+                catch (Exception)
+                {
+                    await DisplayAlert("Errore", "Impossibile trovare la posizione corrente", "Ok");
+                    Process.GetCurrentProcess().Kill();
+                }
+            }
         }
 
         private void EventItemTapped(object sender, ItemTappedEventArgs e)
@@ -30,43 +54,25 @@ namespace ConsigliaViaggi19App
         {
             struttureListView = new ListView();
             struttureListView.RowHeight = 100;
-            try
-            {
-                struttureListView.ItemsSource = Queries.GetStruttureConsigliate(posizione);
-            }
-            catch (SqlException)
-            {
-                DisplayAlert("Errore", "Connessione internet assente", "Ok");
-                Process.GetCurrentProcess().Kill();
-            }
             struttureListView.ItemTemplate = new DataTemplate(typeof(StruttureListItemCell));
             struttureListView.ItemTapped += EventItemTapped;
         }
 
         private async Task InitPosizione()
         {
-            try
+            posizione = await Geolocation.GetLastKnownLocationAsync();
+            if(posizione is null)
             {
-                posizione = await Geolocation.GetLastKnownLocationAsync();
-                if(posizione is null)
+                posizione = await Geolocation.GetLocationAsync(new GeolocationRequest()
                 {
-                    posizione = await Geolocation.GetLocationAsync(new GeolocationRequest()
-                    {
-                        DesiredAccuracy = GeolocationAccuracy.Medium,
-                        Timeout = TimeSpan.FromSeconds(30)
-                    });
-                }
-            }
-            catch (Exception)
-            {
-                await DisplayAlert("Errore", "Impossibile trovare la posizione corrente", "Ok");
-                Process.GetCurrentProcess().Kill();
+                    DesiredAccuracy = GeolocationAccuracy.Medium,
+                    Timeout = TimeSpan.FromSeconds(30)
+                });
             }
         }
 
-        private async void Init()
+        private void Init()
         {
-            await InitPosizione();
             InitStruttureListView();
             infoStruttura = new InfoStruttura();
             Content = struttureListView;
@@ -75,5 +81,6 @@ namespace ConsigliaViaggi19App
         private ListView struttureListView;
         private Location posizione;
         private InfoStruttura infoStruttura;
+        private bool isItAppeared;
     }
 }

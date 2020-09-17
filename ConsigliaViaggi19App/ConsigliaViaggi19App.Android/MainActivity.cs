@@ -21,7 +21,11 @@ namespace ConsigliaViaggi19App.Droid
             base.OnCreate(savedInstanceState);
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
-            ConfigurationManager.Initialise(PCLAppConfig.FileSystemStream.PortableStream.Current);
+            if(!init)
+            {
+                ConfigurationManager.Initialise(PCLAppConfig.FileSystemStream.PortableStream.Current);
+                init = true;
+            }
             LoadApplication(new App());
         }
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
@@ -29,5 +33,7 @@ namespace ConsigliaViaggi19App.Droid
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
+        private static bool init = false;
+
     }
 }

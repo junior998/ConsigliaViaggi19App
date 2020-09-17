@@ -17,6 +17,7 @@ namespace ConsigliaViaggi19App
             NavigationPage.SetHasBackButton(this, false);
             recensioniTrovate = new RecensioniTrovate();
             InitComponents();
+            fromRecensioniTrovate = false;
             StackLayout layout = new StackLayout()
             {
                 Orientation = StackOrientation.Vertical,
@@ -33,19 +34,27 @@ namespace ConsigliaViaggi19App
 
         public int IdStruttura { get; set; }
 
-        protected override void OnAppearing()
+        protected async override void OnAppearing()
         {
-            try
+            if (!fromRecensioniTrovate)
             {
-                List<Tuple<int, int>> quantitaRecensioni = Queries.GetQuantitativoRecensioni(IdStruttura);
-                SetValueQuantitaRecensioniLabels(quantitaRecensioni);
-                SetValueRecensioniStelleProgressBars(quantitaRecensioni);
+                try
+                {
+                    AzzeraQuantitaRecensioniLabels();
+                    AzzeraQuantitaRecensioniProgressBars();
+                    List<Tuple<int, int>> quantitaRecensioni = Queries.GetQuantitativoRecensioni(IdStruttura);
+                    SetValueQuantitaRecensioniLabels(quantitaRecensioni);
+                    SetValueRecensioniStelleProgressBars(quantitaRecensioni);
+                    fromRecensioniTrovate = false;
+                }
+                catch (SqlException)
+                {
+                    await DisplayAlert("Errore", "Connessione internet assente", "Ok");
+                    await Navigation.PopAsync();
+                }
             }
-            catch(SqlException)
-            {
-                DisplayAlert("Errore", "Connessione internet assente", "Ok");
-                Navigation.PopAsync();
-            }
+            else
+                fromRecensioniTrovate = false;
         }
 
         private void SetValueQuantitaRecensioniLabels(List<Tuple<int, int>> quantitaRecensioni)
@@ -328,7 +337,8 @@ namespace ConsigliaViaggi19App
                 ItemsSource = new int[] { 1, 2, 3, 4, 5 },
                 VerticalOptions = LayoutOptions.CenterAndExpand,
                 HorizontalOptions = LayoutOptions.CenterAndExpand,
-                WidthRequest = 100
+                WidthRequest = 100,
+                SelectedIndex = 0
 
             };
             valutazioneMassimaPicker = new Picker()
@@ -337,7 +347,8 @@ namespace ConsigliaViaggi19App
                 ItemsSource = new int[] { 1, 2, 3, 4, 5 },
                 VerticalOptions = LayoutOptions.CenterAndExpand,
                 HorizontalOptions = LayoutOptions.CenterAndExpand,
-                WidthRequest = 100
+                WidthRequest = 100,
+                SelectedIndex = 5
             };
         }
 
@@ -425,17 +436,13 @@ namespace ConsigliaViaggi19App
             dataDalDatePicker = new DatePicker()
             {
                 MaximumDate = DateTime.Today,
-                VerticalOptions = LayoutOptions.CenterAndExpand,
-                HorizontalOptions = LayoutOptions.CenterAndExpand,
-                WidthRequest = 100,
+                WidthRequest = 150,
                 Format = "dd/MM/yyyy"
             };
             dataAlDatePicker = new DatePicker()
             {
                 MaximumDate = DateTime.Today,
-                VerticalOptions = LayoutOptions.CenterAndExpand,
-                HorizontalOptions = LayoutOptions.CenterAndExpand,
-                WidthRequest = 100,
+                WidthRequest = 150,
                 Format = "dd/MM/yyyy"
             };
         }
@@ -527,9 +534,28 @@ namespace ConsigliaViaggi19App
                 DisplayAlert("Errore", "Parametri inseriti non corretti", "Ok");
             else
             {
+                fromRecensioniTrovate = true;
                 recensioniTrovate.Parametri = GetParametri();
                 Navigation.PushAsync(recensioniTrovate);
             }
+        }
+
+        private void AzzeraQuantitaRecensioniLabels()
+        {
+            quantitaRecensioniUnaStella.Text = "0";
+            quantitaRecensioniDueStelle.Text = "0";
+            quantitaRecensioniTreStelle.Text = "0";
+            quantitaRecensioniQuattroStelle.Text = "0";
+            quantitaRecensioniCinqueStelle.Text = "0";
+        }
+
+        private void AzzeraQuantitaRecensioniProgressBars()
+        {
+            recensioniUnaStellaProgressBar.Progress = 0;
+            recensioniDueStelleProgressBar.Progress = 0;
+            recensioniTreStelleProgressBar.Progress = 0;
+            recensioniQuattroStelleProgressBar.Progress = 0;
+            recensioniCinqueStelleProgressBar.Progress = 0;
         }
 
         private ParametriRicercaRecensione GetParametri()
@@ -571,5 +597,6 @@ namespace ConsigliaViaggi19App
         private DatePicker dataAlDatePicker;
         private Button cercaButton;
         private RecensioniTrovate recensioniTrovate;
+        private bool fromRecensioniTrovate;
     }
 }

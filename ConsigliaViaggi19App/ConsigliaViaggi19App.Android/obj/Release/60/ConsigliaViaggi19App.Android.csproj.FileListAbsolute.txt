@@ -1,0 +1,3 @@
+C:\Users\Giuseppe\Desktop\c#\ConsigliaViaggi19App\ConsigliaViaggi19App\ConsigliaViaggi19App.Android\obj\Release\60\MonoAndroid,Version=v6.0.AssemblyAttributes.cs
+C:\Users\Giuseppe\Desktop\c#\ConsigliaViaggi19App\ConsigliaViaggi19App\ConsigliaViaggi19App.Android\obj\Release\60\build.props
+C:\Users\Giuseppe\Desktop\c#\ConsigliaViaggi19App\ConsigliaViaggi19App\ConsigliaViaggi19App.Android\obj\Release\60\adb.props

@@ -2,6 +2,7 @@
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using System.Configuration;
+using Xamarin.Essentials;
 
 namespace ConsigliaViaggi19App
 {

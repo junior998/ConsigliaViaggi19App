@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Text;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace ConsigliaViaggi19App
@@ -17,14 +18,15 @@ namespace ConsigliaViaggi19App
             InitListView();
             Content = listView;
         }
+
         protected async override void OnAppearing()
         {
             try
             {
                 if (!fromRecensionePersonale)
                 {
-                    listView.ItemsSource = null;
-                    listView.ItemsSource = Queries.GetRecensioniPersonali(UtilityUtente.Nickname);
+                    List<RecensionePersonale> recensioniPersonali = Queries.GetRecensioniPersonali(UtilityUtente.Nickname);
+                    await CheckDimensioneRecensioniPersonaliTrovate(recensioniPersonali);
                 }
                 else
                     fromRecensionePersonale = false;
@@ -35,6 +37,21 @@ namespace ConsigliaViaggi19App
                 await Navigation.PopAsync();
             }
         }
+
+        private async Task CheckDimensioneRecensioniPersonaliTrovate(List<RecensionePersonale> recensioniPersonali)
+        {
+            if (recensioniPersonali.Count != 0)
+            {
+                listView.ItemsSource = null;
+                listView.ItemsSource = recensioniPersonali;
+            }
+            else
+            {
+                await DisplayAlert("Errore", "Non è stata fatta alcuna recensione", "Ok");
+                await Navigation.PopAsync();
+            }
+        }
+
         private void InitListView()
         {
             listView = new ListView();
