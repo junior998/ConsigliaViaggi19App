@@ -130,7 +130,8 @@ namespace ConsigliaViaggi19App
             {
                 Text = "Recensioni personali",
                 FontSize = Device.GetNamedSize(NamedSize.Micro, typeof(Label)),
-                BackgroundColor = Color.Green
+                BackgroundColor = Color.Green,
+                TextColor = Color.White
             };
         }
 
@@ -140,7 +141,8 @@ namespace ConsigliaViaggi19App
             {
                 Text = "Logout",
                 FontSize = Device.GetNamedSize(NamedSize.Micro, typeof(Label)),
-                BackgroundColor = Color.Green
+                BackgroundColor = Color.Green,
+                TextColor = Color.White
             };
             logoutButton.Clicked += EventClickedLogoutButton;
         }
@@ -206,7 +208,8 @@ namespace ConsigliaViaggi19App
             loginButton = new Button
             {
                 Text = "Login",
-                BackgroundColor = Color.Green
+                BackgroundColor = Color.Green,
+                TextColor = Color.White
             };
             loginButton.Clicked += EventClickedLoginButton;
         }

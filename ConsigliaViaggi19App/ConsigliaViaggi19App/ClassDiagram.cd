@@ -1,45 +1,53 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
-  <Class Name="ConsigliaViaggi19App.MenuIscrizione">
-    <Position X="0.5" Y="1" Width="4.5" />
+  <Class Name="ConsigliaViaggi19App.MenuRicercaLuoghi">
+    <Position X="2.75" Y="1.75" Width="5.75" />
     <TypeIdentifier>
-      <HashCode>IAAAAAACAAgAAEAAABEAhgAAQEAgAAAAAEAiAQAgAAA=</HashCode>
-      <FileName>MenuIscrizione.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="ConsigliaViaggi19App.MenuLogin">
-    <Position X="6" Y="0.75" Width="4.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAFAAAAQggAEAAABQAAgAAAAAAACAAAEAKIAAAAEA=</HashCode>
-      <FileName>MenuLogin.cs</FileName>
+      <HashCode>QACAIEABCYgAAwAggCAAEIIPUQADAKgAAADQTFDYBBA=</HashCode>
+      <FileName>MenuRicercaLuoghi.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
-      <Field Name="menuIscrizione" />
+      <Field Name="luoghiTrovati" />
     </ShowAsAssociation>
   </Class>
   <Class Name="ConsigliaViaggi19App.Queries">
-    <Position X="12.25" Y="5.75" Width="6" />
+    <Position X="16.5" Y="1.25" Width="10" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAgAAAAAAAABAAAAIAAAAAAAAAAAhQAAAAAIA=</HashCode>
+      <HashCode>AAAAAAAA4AAAAAAAgBAAAAYAABAAAAABCAhQAAAQAoA=</HashCode>
       <FileName>Queries.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ConsigliaViaggi19App.UtilityUtente">
-    <Position X="13.75" Y="2.75" Width="3.25" />
+  <Class Name="ConsigliaViaggi19App.StruttureListItemCell">
+    <Position X="10.5" Y="8.25" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAABAAEAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>UtilityUtente.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>StruttureListItemCell.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ConsigliaViaggi19App.MenuAccount">
-    <Position X="5.5" Y="5.75" Width="5" />
+  <Class Name="ConsigliaViaggi19App.LuoghiTrovati">
+    <Position X="15.75" Y="7.25" Width="5.75" />
     <TypeIdentifier>
-      <HashCode>AAgIJAAAARiwAADAFAAACMCAIgIAIAEAAIAIBAAiADA=</HashCode>
-      <FileName>MenuAccount.cs</FileName>
+      <HashCode>AAAAAAAAAAiAAAAAAAAAAAAAABAAAAEAAAAAAIAAAAA=</HashCode>
+      <FileName>LuoghiTrovati.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
-      <Field Name="menuLogin" />
+      <Field Name="infoStruttura" />
+      <Property Name="Parametri" />
     </ShowAsAssociation>
+  </Class>
+  <Class Name="ConsigliaViaggi19App.ParametriRicercaStrutture">
+    <Position X="10.5" Y="4.25" Width="4" />
+    <TypeIdentifier>
+      <HashCode>AAAAhAAIAABgAAAAAAAAAAAACAAAAAAAABAAIAAIAAA=</HashCode>
+      <FileName>ParametriRicercaStrutture.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConsigliaViaggi19App.InfoStruttura" Collapsed="true">
+    <Position X="17.75" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAgAAAAIAgoAGACAAAAIBgBAAAACIAAQAIAAA=</HashCode>
+      <FileName>InfoStruttura.cs</FileName>
+    </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>

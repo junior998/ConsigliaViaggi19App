@@ -7,32 +7,21 @@ namespace ConsigliaViaggi19App
 {
     class Struttura
     {
-        public double Distanza
+        public string ValutazioneMediaTesto
         {
             get
             {
-                return distanza;
-            }
-            set
-            {
-                distanza = value;
-                DistanzaTesto = $"Distanza: {distanza}km";
+                if (ValutazioneMedia == 0)
+                    return "Valutazione media: Nessuna Recensione";
+                return $"Valutazione media: {ValutazioneMedia} stelle";
             }
         }
 
-        public double ValutazioneMedia
+        public string DistanzaTesto
         {
             get
             {
-                return valutazioneMedia;
-            }
-            set
-            {
-                valutazioneMedia = value;
-                if (valutazioneMedia == 0)
-                    ValutazioneMediaTesto = "Valutazione media: Nessuna Recensione";
-                else
-                    ValutazioneMediaTesto = $"Valutazione media: {valutazioneMedia} stelle";
+                return $"Distanza: {Distanza}km";
             }
         }
 
@@ -44,10 +33,7 @@ namespace ConsigliaViaggi19App
         public double Longitudine { get; set; }
         public string Tipo { get; set; }
         public string NomeCitta { get; set; }
-        public string DistanzaTesto { get; set; }
-        public string ValutazioneMediaTesto { get; set; }
-
-        private double distanza;
-        private double valutazioneMedia;
+        public double Distanza { get; set; }
+        public double ValutazioneMedia { get; set; }
     }
 }

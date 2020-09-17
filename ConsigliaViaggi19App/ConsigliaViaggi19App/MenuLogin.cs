@@ -119,7 +119,8 @@ namespace ConsigliaViaggi19App
             loginButton = new Button
             {
                 Text = "Login",
-                BackgroundColor = Color.Green
+                BackgroundColor = Color.Green,
+                TextColor = Color.White
             };
             loginButton.Clicked += EventClickedLoginButton;
         }

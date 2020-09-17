@@ -134,7 +134,8 @@ namespace ConsigliaViaggi19App
             {
                 BackgroundColor = Color.Green,
                 Text = "Iscriviti",
-                HorizontalOptions = LayoutOptions.End
+                HorizontalOptions = LayoutOptions.End,
+                TextColor = Color.White
             };
             iscrivitiButton.Clicked += EventClickedIscrivitiButton;
         }

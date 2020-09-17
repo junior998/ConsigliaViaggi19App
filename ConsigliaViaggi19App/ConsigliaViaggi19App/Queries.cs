@@ -13,6 +13,52 @@ namespace ConsigliaViaggi19App
 {
     static class Queries
     {
+        public static List<Struttura> GetLuoghiTrovati(ParametriRicercaStrutture parametri)
+        {
+            StringBuilder sottoQueryUno = new StringBuilder($"select S.idStruttura, S.nome, S.immagine, S.tipo, S.latitudine, " +
+                $"S.longitudine, S.descrizione, C.nome as nomeCitta " +
+                $"from Strutture S, Citta C " +
+                $"where S.idCitta = C.idCitta ");
+            if (!(parametri.NomeStruttura is null))
+                sottoQueryUno.Append($"and lower(S.Nome) like '%{parametri.NomeStruttura.Replace("'", "''")}%' ");
+            if (parametri.TipoStruttura != "Qualsiasi struttura")
+                sottoQueryUno.Append($"and S.Tipo = '{parametri.TipoStruttura}' ");
+            if (parametri.Citta != "Posizione corrente")
+                sottoQueryUno.Append($"and C.Nome = '{parametri.Citta}' ");
+            StringBuilder sottoQueryDue = new StringBuilder($"select S.idStruttura, ISNULL(avg(R.valutazione), 0) as valutazioneMedia " +
+               "from Strutture S left outer join Recensioni R on S.idStruttura = R.idStruttura " +
+               "group by S.idStruttura");
+            string query = "select * " +
+                $"from ({sottoQueryUno}) TMP1, ({sottoQueryDue}) TMP2 " +
+                $"where TMP1.idStruttura = TMP2.idStruttura and " +
+                $"TMP2.valutazioneMedia >= {parametri.ValutazioneMediaMinima} and TMP2.valutazioneMedia <= {parametri.ValutazioneMediaMassima};";
+            DataTable table = EseguiComando(query);
+            if (parametri.IsFiltroPosizioneAttivo)
+                return FiltraStrutturePerDistanza(parametri.PosizioneCorrente, table, parametri.DistanzaMinima, parametri.DistanzaMassima);
+            return GetLuoghiTrovatiDaDataTable(parametri.PosizioneCorrente, table);
+        }
+        public static List<string> GetCitta()
+        {
+            string query = "select distinct nome " +
+                           "from Citta";
+            DataTable table = EseguiComando(query);
+            List<string> citta = new List<string>();
+            foreach (DataRow row in table.Rows)
+                citta.Add(row["nome"].ToString());
+            return citta;
+        }
+
+        public static List<string> GetTipiStrutture()
+        {
+            string query = "select distinct tipo " +
+                           "from Strutture";
+            DataTable table = EseguiComando(query);
+            List<string> citta = new List<string>();
+            foreach (DataRow row in table.Rows)
+                citta.Add(row["tipo"].ToString());
+            return citta;
+        }
+
         public static List<Struttura> GetStruttureConsigliate(Location posizioneCorrente)
         {
             string query = "select * " +
@@ -111,6 +157,27 @@ namespace ConsigliaViaggi19App
             return table;
         }
 
+        private static List<Struttura> GetLuoghiTrovatiDaDataTable(Location posizioneCorrente, DataTable table)
+        {
+            List<Struttura> struttureConsigliate = new List<Struttura>();
+            foreach (DataRow row in table.Rows)
+                 struttureConsigliate.Add(CreaStruttura(row, posizioneCorrente));
+            return struttureConsigliate;
+        }
+
+        private static List<Struttura> FiltraStrutturePerDistanza(Location posizioneCorrente, DataTable table, double distanzaMinima, double distanzaMassima)
+        {
+            List<Struttura> struttureConsigliate = new List<Struttura>();
+            foreach (DataRow row in table.Rows)
+            {
+                Location posizioneStruttura = new Location((double)row["latitudine"], (double)row["longitudine"]);
+                double distanza = GetDistanza(posizioneCorrente, posizioneStruttura);
+                if (distanzaMinima <= distanza && distanzaMassima >= distanza)
+                    struttureConsigliate.Add(CreaStruttura(row, posizioneCorrente));
+            }
+            return struttureConsigliate;
+        }
+
         private static List<Struttura> FiltraStrutturePerDistanza(Location posizioneCorrente, DataTable table)
         {
             List<Struttura> struttureConsigliate = new List<Struttura>();
@@ -135,8 +202,8 @@ namespace ConsigliaViaggi19App
                 Id = (int)row["idStruttura"],
                 Nome = row["nome"].ToString(),
                 Tipo = row["tipo"].ToString(),
-                Latitudine = (double)row["latitudine"],
-                Longitudine = (double)row["longitudine"],
+                Latitudine = latitudineStruttura,
+                Longitudine = longitudineStruttura,
                 Descrizione = row["Descrizione"].ToString(),
                 NomeCitta = row["nomeCitta"].ToString(),
                 ValutazioneMedia = double.Parse(row["valutazioneMedia"].ToString()),

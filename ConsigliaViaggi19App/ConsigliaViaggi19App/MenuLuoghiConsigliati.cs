@@ -7,6 +7,7 @@ using System.Text;
 using Xamarin.Forms;
 using Xamarin.Essentials;
 using System.Runtime.InteropServices;
+using System.Data.SqlClient;
 
 namespace ConsigliaViaggi19App
 {
@@ -15,7 +16,6 @@ namespace ConsigliaViaggi19App
         public MenuLuoghiConsigliati()
         {
             InitPosizione();
-            InitStrutture();
             InitStruttureListView();
             infoStruttura = new InfoStruttura();
             Content = struttureListView;
@@ -23,23 +23,25 @@ namespace ConsigliaViaggi19App
 
         private void EventItemTapped(object sender, ItemTappedEventArgs e)
         {
-            infoStruttura.Struttura = strutture[e.ItemIndex];
+            infoStruttura.Struttura = ((List<Struttura>)struttureListView.ItemsSource)[e.ItemIndex];
             Navigation.PushAsync(infoStruttura);
             ((ListView)sender).SelectedItem = null;
-        }
-
-        private void InitStrutture()
-        {
-            strutture = new List<Struttura>();
-            strutture = Queries.GetStruttureConsigliate(posizione);
         }
 
         private void InitStruttureListView()
         {
             struttureListView = new ListView();
             struttureListView.RowHeight = 100;
-            struttureListView.ItemsSource = strutture;
-            struttureListView.ItemTemplate = new DataTemplate(typeof(StruttureConsigliataListItemCell));
+            try
+            {
+                struttureListView.ItemsSource = Queries.GetStruttureConsigliate(posizione);
+            }
+            catch (SqlException)
+            {
+                DisplayAlert("Errore", "Connessione internet assente", "Ok");
+                Process.GetCurrentProcess().Kill();
+            }
+            struttureListView.ItemTemplate = new DataTemplate(typeof(StruttureListItemCell));
             struttureListView.ItemTapped += EventItemTapped;
         }
 
@@ -59,12 +61,11 @@ namespace ConsigliaViaggi19App
             }
             catch (Exception)
             {
-                await DisplayAlert("Errore", "Errore posizione non disponibile", "Ok");
+                await DisplayAlert("Errore", "Impossibile trovare la posizione corrente", "Ok");
                 Process.GetCurrentProcess().Kill();
             }
         }
 
-        private List<Struttura> strutture;
         private ListView struttureListView;
         private Location posizione;
         private InfoStruttura infoStruttura;
