@@ -16,6 +16,7 @@ namespace ConsigliaViaggi19App
             InitPasswordEntry();
             InitIscrivitiLabel();
             InitLoginButton();
+            menuIscrizione = new MenuIscrizione();
             StackLayout formLayout = GetFormStackLayout();
             StackLayout stackLayoutForm = new StackLayout
             {
@@ -37,29 +38,39 @@ namespace ConsigliaViaggi19App
 
         protected override void OnAppearing()
         {
-            nicknameEntry.Text = "";
-            passwordEntry.Text = "";
+            if (UtilityUtente.IsUtenteConnesso)
+                Navigation.PopAsync();
+            else
+            {
+                nicknameEntry.Text = "";
+                passwordEntry.Text = "";
+            }
         }
 
-        private async void EventClickedLoginButton(object sender, EventArgs eventArgs)
+        private void EventClickedLoginButton(object sender, EventArgs eventArgs)
         {
             try
             {
                 if (nicknameEntry.Text.Length == 0 || passwordEntry.Text.Length <= UtilityUtente.LunghezzaPassword)
-                    await DisplayAlert("Errore", "Nickname o password non corretti", "Ok");
+                    DisplayAlert("Errore", "Nickname o password non corretti", "Ok");
                 else if (!Queries.IsAccountEsistente(nicknameEntry.Text, passwordEntry.Text))
-                    await DisplayAlert("Errore", "Account inesistente", "Ok");
+                    DisplayAlert("Errore", "Account inesistente", "Ok");
                 else
                 {
                     UtilityUtente.IsUtenteConnesso = true;
                     UtilityUtente.Nickname = nicknameEntry.Text;
-                    await Navigation.PopAsync();
+                    Navigation.PopAsync();
                 }
             }
             catch (SqlException)
             {
-                await DisplayAlert("Errore", "Connessione internet assente", "Ok");
+                DisplayAlert("Errore", "Connessione internet assente", "Ok");
             }
+        }
+
+        private void EventTappedIscrivitiLabel(object sender, EventArgs args)
+        {
+            Navigation.PushAsync(menuIscrizione);
         }
 
         private void InitLoginLabel()
@@ -98,6 +109,9 @@ namespace ConsigliaViaggi19App
                 Text = "Iscriviti all'app",
                 TextDecorations = TextDecorations.Underline
             };
+            TapGestureRecognizer gesture = new TapGestureRecognizer();
+            gesture.Tapped += EventTappedIscrivitiLabel;
+            iscrivitiLabel.GestureRecognizers.Add(gesture);
         }
 
         private void InitLoginButton()
@@ -133,5 +147,6 @@ namespace ConsigliaViaggi19App
         private Entry passwordEntry;
         private Label iscrivitiLabel;
         private Button loginButton;
+        private MenuIscrizione menuIscrizione;
     }
 }

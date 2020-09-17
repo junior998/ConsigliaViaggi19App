@@ -42,6 +42,40 @@ namespace ConsigliaViaggi19App
             return true;
         }
 
+        public static bool IsAccountEsistente(string nickname)
+        {
+            string query = "select count(*) as conta " +
+               "from Utenti U " +
+               $"where U.nickname = '{nickname}'";
+            DataTable dataTable = EseguiComando(query);
+            foreach (DataRow riga in dataTable.Rows)
+            {
+                int temp = int.Parse(riga["conta"].ToString());
+                if (temp == 0)
+                    return false;
+            }
+            return true;
+        }
+
+        public static void CreaAccount(string nome, string cognome, string nickname, string password)
+        {
+            string query = "insert into Utenti (nome, cognome, nickname, password, dataIscrizione) values " +
+                           $"('{nome}', '{cognome}', '{nickname}', '{password}', '{DateTime.Now}')";
+            EseguiModifica(query);
+        }
+
+        private static void EseguiModifica(string query)
+        {
+            SqlConnection connection = new SqlConnection(stringConnection);
+            SqlCommand command = new SqlCommand(query, connection)
+            {
+                CommandTimeout = 15
+            };
+            connection.Open();
+            command.ExecuteNonQuery();
+            connection.Dispose();
+        }
+
         private static DataTable EseguiComando(string query)
         {
             SqlConnection connection = new SqlConnection(stringConnection);

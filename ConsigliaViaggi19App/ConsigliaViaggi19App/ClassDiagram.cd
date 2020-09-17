@@ -1,45 +1,4 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
-  <Class Name="ConsigliaViaggi19App.MenuPrincipale">
-    <Position X="7.75" Y="1.5" Width="3.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAEAAAAAAAQA=</HashCode>
-      <FileName>MenuPrincipale.cs</FileName>
-    </TypeIdentifier>
-    <ShowAsAssociation>
-      <Field Name="menuAccount" />
-    </ShowAsAssociation>
-  </Class>
-  <Class Name="ConsigliaViaggi19App.MenuAccount">
-    <Position X="1" Y="1.25" Width="5.5" />
-    <TypeIdentifier>
-      <HashCode>AAgIIAAAARiwAADAFAAACMCAIgIAAAEAAIAIBAAiADA=</HashCode>
-      <FileName>MenuAccount.cs</FileName>
-    </TypeIdentifier>
-    <ShowAsAssociation>
-      <Field Name="menuLogin" />
-    </ShowAsAssociation>
-  </Class>
-  <Class Name="ConsigliaViaggi19App.UtilityUtente">
-    <Position X="13.5" Y="3.75" Width="3.25" />
-    <TypeIdentifier>
-      <HashCode>AAABAAEAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>UtilityUtente.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="ConsigliaViaggi19App.MenuLogin">
-    <Position X="9.5" Y="6" Width="4.75" />
-    <TypeIdentifier>
-      <HashCode>AAAAFAAAAQggAEAAABAAAgAAAAAAACAAAEAKAAAAAEA=</HashCode>
-      <FileName>MenuLogin.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="ConsigliaViaggi19App.Queries">
-    <Position X="13.25" Y="0.5" Width="4.25" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAABAAAAIAAAAAAAAAAABQAAAAAIA=</HashCode>
-      <FileName>Queries.cs</FileName>
-    </TypeIdentifier>
-  </Class>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>

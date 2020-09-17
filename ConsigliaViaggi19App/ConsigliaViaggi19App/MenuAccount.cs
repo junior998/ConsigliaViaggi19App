@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Data;
 using System.Data.SqlClient;
+using System.Globalization;
 using System.Runtime.CompilerServices;
 using Xamarin.Forms;
 
@@ -59,6 +60,8 @@ namespace ConsigliaViaggi19App
                 catch (SqlException)
                 {
                     DisplayAlert("Errore", "Connessione internet assente", "Ok");
+                    Content = stackLayoutEffettuareAccesso;
+                    UtilityUtente.IsUtenteConnesso = false;
                 }
             }
             else if (UtilityUtente.IsUtenteConnesso && primoAccesso == true)
@@ -67,6 +70,17 @@ namespace ConsigliaViaggi19App
                 Content = stackLayoutEffettuareAccesso;
         }
         
+        private void EventClickedLogoutButton(object sender, EventArgs args)
+        {
+            UtilityUtente.IsUtenteConnesso = false;
+            Content = stackLayoutEffettuareAccesso;
+        }
+
+        private void EventClickedLoginButton(object sendet, EventArgs args)
+        {
+            Navigation.PushAsync(menuLogin);
+        }
+
         private void CaricaDatiUtente(DataTable dettagliUtenteTable)
         {
             foreach (DataRow riga in dettagliUtenteTable.Rows)
@@ -126,6 +140,7 @@ namespace ConsigliaViaggi19App
                 FontSize = Device.GetNamedSize(NamedSize.Micro, typeof(Label)),
                 BackgroundColor = Color.Green
             };
+            logoutButton.Clicked += EventClickedLogoutButton;
         }
 
         private Frame InitFrameLabels()
@@ -191,10 +206,7 @@ namespace ConsigliaViaggi19App
                 Text = "Login",
                 BackgroundColor = Color.Green
             };
-            loginButton.Clicked += async (sender, eventArgs) =>
-            {
-                await Navigation.PushAsync(menuLogin);
-            };
+            loginButton.Clicked += EventClickedLoginButton;
         }
 
         private Frame InitFrameEffettuareAccesso()
