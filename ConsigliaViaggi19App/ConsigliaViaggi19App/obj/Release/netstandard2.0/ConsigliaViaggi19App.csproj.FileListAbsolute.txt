@@ -1,0 +1,14 @@
+C:\Users\Giuseppe\Desktop\c#\ConsigliaViaggi19App\ConsigliaViaggi19App\ConsigliaViaggi19App\bin\Release\netstandard2.0\ConsigliaViaggi19App.dll.config
+C:\Users\Giuseppe\Desktop\c#\ConsigliaViaggi19App\ConsigliaViaggi19App\ConsigliaViaggi19App\bin\Release\netstandard2.0\ConsigliaViaggi19App.deps.json
+C:\Users\Giuseppe\Desktop\c#\ConsigliaViaggi19App\ConsigliaViaggi19App\ConsigliaViaggi19App\bin\Release\netstandard2.0\ConsigliaViaggi19App.dll
+C:\Users\Giuseppe\Desktop\c#\ConsigliaViaggi19App\ConsigliaViaggi19App\ConsigliaViaggi19App\bin\Release\netstandard2.0\ref\ConsigliaViaggi19App.dll
+C:\Users\Giuseppe\Desktop\c#\ConsigliaViaggi19App\ConsigliaViaggi19App\ConsigliaViaggi19App\bin\Release\netstandard2.0\ConsigliaViaggi19App.pdb
+C:\Users\Giuseppe\Desktop\c#\ConsigliaViaggi19App\ConsigliaViaggi19App\ConsigliaViaggi19App\obj\Release\netstandard2.0\ConsigliaViaggi19App.csprojAssemblyReference.cache
+C:\Users\Giuseppe\Desktop\c#\ConsigliaViaggi19App\ConsigliaViaggi19App\ConsigliaViaggi19App\obj\Release\netstandard2.0\App.xaml.g.cs
+C:\Users\Giuseppe\Desktop\c#\ConsigliaViaggi19App\ConsigliaViaggi19App\ConsigliaViaggi19App\obj\Release\netstandard2.0\ConsigliaViaggi19App.AssemblyInfoInputs.cache
+C:\Users\Giuseppe\Desktop\c#\ConsigliaViaggi19App\ConsigliaViaggi19App\ConsigliaViaggi19App\obj\Release\netstandard2.0\ConsigliaViaggi19App.AssemblyInfo.cs
+C:\Users\Giuseppe\Desktop\c#\ConsigliaViaggi19App\ConsigliaViaggi19App\ConsigliaViaggi19App\obj\Release\netstandard2.0\ConsigliaViaggi19App.csproj.CoreCompileInputs.cache
+C:\Users\Giuseppe\Desktop\c#\ConsigliaViaggi19App\ConsigliaViaggi19App\ConsigliaViaggi19App\obj\Release\netstandard2.0\XamlC.stamp
+C:\Users\Giuseppe\Desktop\c#\ConsigliaViaggi19App\ConsigliaViaggi19App\ConsigliaViaggi19App\obj\Release\netstandard2.0\ConsigliaViaggi19App.dll
+C:\Users\Giuseppe\Desktop\c#\ConsigliaViaggi19App\ConsigliaViaggi19App\ConsigliaViaggi19App\obj\Release\netstandard2.0\ref\ConsigliaViaggi19App.dll
+C:\Users\Giuseppe\Desktop\c#\ConsigliaViaggi19App\ConsigliaViaggi19App\ConsigliaViaggi19App\obj\Release\netstandard2.0\ConsigliaViaggi19App.pdb

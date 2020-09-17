@@ -7,7 +7,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsigliaViaggi19App.Androi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsigliaViaggi19App.iOS", "ConsigliaViaggi19App\ConsigliaViaggi19App.iOS\ConsigliaViaggi19App.iOS.csproj", "{E50A7947-ACAC-4D03-8C20-2FB6B55AFCFA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsigliaViaggi19App", "ConsigliaViaggi19App\ConsigliaViaggi19App\ConsigliaViaggi19App.csproj", "{0A81CE7A-AEAC-4533-867D-0A1A579AA19C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsigliaViaggi19App", "ConsigliaViaggi19App\ConsigliaViaggi19App\ConsigliaViaggi19App.csproj", "{0A81CE7A-AEAC-4533-867D-0A1A579AA19C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Recensione.UnitTest", "Recensione.UnitTest\Recensione.UnitTest.csproj", "{DAB46DAE-35A9-44D6-81B6-801DC245D292}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -73,6 +75,18 @@ Global
 		{0A81CE7A-AEAC-4533-867D-0A1A579AA19C}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
 		{0A81CE7A-AEAC-4533-867D-0A1A579AA19C}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 		{0A81CE7A-AEAC-4533-867D-0A1A579AA19C}.Release|iPhoneSimulator.Deploy.0 = Release|Any CPU
+		{DAB46DAE-35A9-44D6-81B6-801DC245D292}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DAB46DAE-35A9-44D6-81B6-801DC245D292}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DAB46DAE-35A9-44D6-81B6-801DC245D292}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{DAB46DAE-35A9-44D6-81B6-801DC245D292}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{DAB46DAE-35A9-44D6-81B6-801DC245D292}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{DAB46DAE-35A9-44D6-81B6-801DC245D292}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{DAB46DAE-35A9-44D6-81B6-801DC245D292}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DAB46DAE-35A9-44D6-81B6-801DC245D292}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DAB46DAE-35A9-44D6-81B6-801DC245D292}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{DAB46DAE-35A9-44D6-81B6-801DC245D292}.Release|iPhone.Build.0 = Release|Any CPU
+		{DAB46DAE-35A9-44D6-81B6-801DC245D292}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{DAB46DAE-35A9-44D6-81B6-801DC245D292}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -21,7 +21,7 @@ namespace ConsigliaViaggi19App
 
         private void EventItemTapped(object sender, ItemTappedEventArgs e)
         {
-            infoStruttura.Struttura = ((List<Struttura>)struttureListView.ItemsSource)[e.ItemIndex];
+            infoStruttura.Struttura = (Struttura)struttureListView.SelectedItem;
             Navigation.PushAsync(infoStruttura);
             ((ListView)sender).SelectedItem = null;
         }

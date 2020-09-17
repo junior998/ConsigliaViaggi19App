@@ -17,7 +17,7 @@ namespace ConsigliaViaggi19App
             InitListView();
             Content = listView;
         }
-        protected override void OnAppearing()
+        protected async override void OnAppearing()
         {
             try
             {
@@ -31,8 +31,8 @@ namespace ConsigliaViaggi19App
             }
             catch (SqlException)
             {
-                DisplayAlert("Errore", "Connessione internet assente", "Ok");
-                Navigation.PopAsync();
+                await DisplayAlert("Errore", "Connessione internet assente", "Ok");
+                await Navigation.PopAsync();
             }
         }
         private void InitListView()
@@ -42,13 +42,12 @@ namespace ConsigliaViaggi19App
             listView.RowHeight = 100;
             listView.ItemTapped += EventListViewItemTapped;
         }
-
         private void EventListViewItemTapped(object sender, ItemTappedEventArgs e)
         {
             fromRecensionePersonale = true;
             visualizzaRecensionePersonale.RecensionePersonale = (RecensionePersonale)listView.SelectedItem;
             Navigation.PushAsync(visualizzaRecensionePersonale);
-            ((ListView)sender).SelectedItem = null;
+            listView.SelectedItem = null;
         }
 
         private ListView listView;

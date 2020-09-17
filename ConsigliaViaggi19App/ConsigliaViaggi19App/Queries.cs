@@ -175,20 +175,28 @@ namespace ConsigliaViaggi19App
             return FiltraStrutturePerDistanza(posizioneCorrente, table);
         }
 
-        public static DataTable GetDettagliUtente(string nickname)
+        public static DettagliUtente GetDettagliUtente(string nickname)
         {
-            string query = "select U.nickname, U.nome, U.cognome, U.dataIscrizione " +
-                           "from Utenti U " +
-                           $"where U.nickname = '{nickname.Replace("'", "''")}'";
-            return EseguiComando(query);
-        }
-
-        public static DataTable GetLuoghiRecensiti(string nickname)
-        {
-            string query = "select count(*) as luoghiRecensiti " +
-                           "from Recensioni R " +
-                           $"where R.nicknameUtente = '{nickname.Replace("'", "''")}'";
-            return EseguiComando(query);
+            string query = "select * " +
+                            "from(select U.nickname, U.nome, U.cognome, U.dataIscrizione " +
+                                  "from Utenti U " +
+                                  $"where U.nickname = '{nickname.Replace("'", "''")}') TMP1, " +
+                                  "(select R.nicknameUtente, count(*) as luoghiRecensiti " +
+                                   "from Recensioni R " +
+                                   $"where R.nicknameUtente = '{nickname.Replace("'", "''")}' " +
+                                   "group by R.nicknameUtente) TMP2 " +
+                            "where TMP1.nickname = TMP2.nicknameUTente;";
+            DataTable table = EseguiComando(query);
+            DataRow row = table.Rows[0];
+            DettagliUtente dettagliUtente = new DettagliUtente()
+            {
+                Nickname = row["nickname"].ToString(),
+                Nome = row["nome"].ToString(),
+                Cognome = row["cognome"].ToString(),
+                DataIscrizione = (DateTime)row["dataIscrizione"],
+                LuoghiRecensiti = (int)row["luoghiRecensiti"]
+            };
+            return dettagliUtente;
         }
 
         public static bool IsAccountEsistente(string nickname, string password)

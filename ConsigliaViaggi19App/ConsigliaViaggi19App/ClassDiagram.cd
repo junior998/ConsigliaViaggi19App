@@ -1,42 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
-  <Class Name="ConsigliaViaggi19App.InfoStruttura">
-    <Position X="3" Y="1.25" Width="3.75" />
+  <Class Name="ConsigliaViaggi19App.MenuIscrizione">
+    <Position X="5" Y="3.75" Width="4.25" />
     <TypeIdentifier>
-      <HashCode>AAAIAABAgAgAAIAgoAGACgAAAIBgBAgAADIAAQAIAgA=</HashCode>
-      <FileName>InfoStruttura.cs</FileName>
-    </TypeIdentifier>
-    <ShowAsAssociation>
-      <Field Name="menuLogin" />
-      <Field Name="aggiungiRecensione" />
-    </ShowAsAssociation>
-  </Class>
-  <Class Name="ConsigliaViaggi19App.Queries">
-    <Position X="11" Y="9" Width="6" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAA4AAAAAAAgBAAAAYAABAIAAIBCAjQAAAQAoA=</HashCode>
-      <FileName>Queries.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="ConsigliaViaggi19App.MenuLogin">
-    <Position X="12.25" Y="2.75" Width="4.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAFAAAAQggAEAAABQAAgAAAAAAACAAAEAKIAAAAEA=</HashCode>
-      <FileName>MenuLogin.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="ConsigliaViaggi19App.AggiungiRecensione">
-    <Position X="3.5" Y="9" Width="4.25" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAgBAgBCAAAAAAAAAAAAAAIgACAgSAAAAAKIABA=</HashCode>
-      <FileName>AggiungiRecensione.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="ConsigliaViaggi19App.Recensione">
-    <Position X="8" Y="16.75" Width="4.5" />
-    <TypeIdentifier>
-      <HashCode>AgAEAAAAQAAAAAAgBAAAQAgAAAAABAEACAgAAAAAABA=</HashCode>
-      <FileName>Recensione.cs</FileName>
+      <HashCode>IAAAAAACAAgAAEAAABEAhgAAQEAgAAAAAEAiAQAgAAA=</HashCode>
+      <FileName>MenuIscrizione.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />

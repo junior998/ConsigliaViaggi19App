@@ -51,10 +51,8 @@ namespace ConsigliaViaggi19App
                 nicknameLabel.Text = $"Nickname: {UtilityUtente.Nickname}";
                 try
                 {
-                    DataTable dettagliUtenteTable = Queries.GetDettagliUtente(UtilityUtente.Nickname);
-                    DataTable luoghiRecensitiTable = Queries.GetLuoghiRecensiti(UtilityUtente.Nickname);
-                    CaricaDatiUtente(dettagliUtenteTable);
-                    CaricaLuoghiRecensitiUtente(luoghiRecensitiTable);
+                    DettagliUtente dettagliUtente = Queries.GetDettagliUtente(UtilityUtente.Nickname);
+                    CaricaDatiUtente(dettagliUtente);
                     Content = stackLayoutAccessoEffettuato;
                     primoAccesso = true;
                 }
@@ -83,20 +81,12 @@ namespace ConsigliaViaggi19App
             Navigation.PushAsync(menuLogin);
         }
 
-        private void CaricaDatiUtente(DataTable dettagliUtenteTable)
+        private void CaricaDatiUtente(DettagliUtente dettagliUtente)
         {
-            foreach (DataRow riga in dettagliUtenteTable.Rows)
-            {
-                nomeLabel.Text = $"Nome: {riga["nome"]}";
-                cognomeLabel.Text = $"Cognome: {riga["cognome"]}";
-                iscrittoDalLabel.Text = $"Iscritto dal: {((DateTime)riga["dataIscrizione"]).ToString("dd/MM/yyyy")}";
-            }
-        }
-
-        private void CaricaLuoghiRecensitiUtente(DataTable luoghiRecensitiTable)
-        {
-            foreach (DataRow riga in luoghiRecensitiTable.Rows)
-                luoghiRecensitiLabel.Text = $"Luoghi Recensiti {riga["luoghiRecensiti"]}";
+            nomeLabel.Text = $"Nome: {dettagliUtente.Nome}";
+            cognomeLabel.Text = $"Cognome: {dettagliUtente.Cognome}";
+            iscrittoDalLabel.Text = $"Iscritto dal: {dettagliUtente.DataIscrizione.ToString("dd/MM/yyyy")}";
+            luoghiRecensitiLabel.Text = $"Luoghi recensiti: {dettagliUtente.LuoghiRecensiti}";
         }
 
         private void InitNicknameLabel()

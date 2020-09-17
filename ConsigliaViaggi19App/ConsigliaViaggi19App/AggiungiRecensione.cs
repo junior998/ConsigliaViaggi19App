@@ -26,6 +26,13 @@ namespace ConsigliaViaggi19App
 
         public int IdStruttura { get; set; }
 
+        protected override void OnAppearing()
+        {
+            editor.Text = "";
+            visibileNicknameCheckBox.IsChecked = false;
+            valutazionePicker.SelectedIndex = -1;
+        }
+
         private void InitComponents()
         {
             visibileNicknameCheckBox = new CheckBox()

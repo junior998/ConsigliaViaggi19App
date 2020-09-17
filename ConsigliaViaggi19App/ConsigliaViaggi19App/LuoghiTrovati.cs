@@ -15,10 +15,12 @@ namespace ConsigliaViaggi19App
             Content = listView;
             Title = "Luoghi Trovati";
             NavigationPage.SetHasBackButton(this, false);
+            fromInfoStruttura = false;
         }
 
         private void EventItemTapped(object sender, ItemTappedEventArgs e)
         {
+            fromInfoStruttura = true;
             List<Struttura> strutture = (List<Struttura>)listView.ItemsSource;
             infoStruttura.Struttura = strutture[e.ItemIndex];
             Navigation.PushAsync(infoStruttura);
@@ -27,22 +29,25 @@ namespace ConsigliaViaggi19App
 
         protected override void OnAppearing()
         {
-            try
-            {
-                List<Struttura> strutture = Queries.GetLuoghiTrovati(Parametri);
-                if(strutture.Count != 0)
-                    listView.ItemsSource = strutture;
-                else
+            if (fromInfoStruttura)
+                fromInfoStruttura = false;
+            else
+                try
                 {
-                    DisplayAlert("Errore", "Nessuna struttura trovata", "Ok");
+                    List<Struttura> strutture = Queries.GetLuoghiTrovati(Parametri);
+                    if(strutture.Count != 0)
+                        listView.ItemsSource = strutture;
+                    else
+                    {
+                        DisplayAlert("Errore", "Nessuna struttura trovata", "Ok");
+                        Navigation.PopAsync();
+                    }
+                }
+                catch(SqlException)
+                {
+                    DisplayAlert("Errore", "Connessione internet assente", "Ok");
                     Navigation.PopAsync();
                 }
-            }
-            catch(SqlException)
-            {
-                DisplayAlert("Errore", "Connessione internet assente", "Ok");
-                Navigation.PopAsync();
-            }
         }
 
         private void InitListView()
@@ -56,5 +61,6 @@ namespace ConsigliaViaggi19App
         public ParametriRicercaStrutture Parametri { get; set; }
         private ListView listView;
         private InfoStruttura infoStruttura;
+        private bool fromInfoStruttura;
     }
 }

@@ -57,7 +57,7 @@ namespace ConsigliaViaggi19App
 
             ParametriRicercaStrutture parametri = new ParametriRicercaStrutture()
             {
-                NomeStruttura = (nomeStruttura.Text is null) ? "" : nomeStruttura.Text.ToLower(),
+                NomeStruttura = nomeStruttura.Text.ToLower(),
                 TipoStruttura = tipoStruttura.ItemsSource[tipoStruttura.SelectedIndex].ToString(),
                 Citta = citta.ItemsSource[citta.SelectedIndex].ToString(),
                 IsFiltroPosizioneAttivo = false
@@ -145,7 +145,7 @@ namespace ConsigliaViaggi19App
 
         private void EventCittaSelectedIndexChanged(object sender, EventArgs e)
         {
-            string cittaSelezionata = ((Picker)sender).SelectedItem.ToString();
+            string cittaSelezionata = citta.SelectedItem.ToString();
             if(cittaSelezionata == "Posizione corrente")
             {
                 distanzaMinimaEntry.IsEnabled = true;
@@ -184,7 +184,8 @@ namespace ConsigliaViaggi19App
                 Keyboard = Keyboard.Default,
                 Placeholder = "Nome Struttura",
                 HorizontalOptions = LayoutOptions.Fill,
-                TextColor = Color.DarkGreen
+                TextColor = Color.DarkGreen,
+                //Text = ""
             };
         }
 

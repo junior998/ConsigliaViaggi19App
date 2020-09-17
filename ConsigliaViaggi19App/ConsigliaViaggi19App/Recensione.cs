@@ -4,15 +4,15 @@ using System.Text;
 
 namespace ConsigliaViaggi19App
 {
-    class Recensione
+    public class Recensione
     {
 		public string IdentificativoUtente
         {
 			get
             {
 				if (VisibileConNickname)
-					return "Utente: " + NicknameUtente;
-				return "Utente: " + NomeUtente;
+					return $"Utente: {NicknameUtente}";
+				return $"Utente: {NomeUtente}";
             }
         }
 
@@ -24,11 +24,14 @@ namespace ConsigliaViaggi19App
             }
         }
 
+		//Il metodo restituisce la stringa "Commento: " + Commento
+		//se Commento.Length <= 40
+		//altrimenti vengono restituiti solo i primi 40 caratteri
 		public string CommentoText
         {
 			get
             {
-				if(Commento.Length <= 40)
+				if (Commento.Length <= 40)
 					return $"Commento: {Commento}";
 				return $"Commento: " + Commento.Substring(0, 40) + "...";
 			}
